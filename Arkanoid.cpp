@@ -2,14 +2,13 @@
 
 namespace hsg {
 
-    Arkanoid::Arkanoid(EventDispatcher* eventDispatcher, CoordSystem* coordSystem):
+    Arkanoid::Arkanoid(EventDispatcher* eventDispatcher, GameLayout* layout):
 	m_eventDispatcher(eventDispatcher),
 	m_physicsService(&m_timeService),
-	m_layout(coordSystem),
-	m_background(&m_layout.background),
-	m_ball(&m_layout.ball),
-	m_bat(&m_layout.bat),
-	m_wall(&m_layout.wall){
+	m_background(&layout->background),
+	m_ball(&layout->ball),
+	m_bat(&layout->bat),
+	m_wall(&layout->wall){
     }
 
     Arkanoid::~Arkanoid() {

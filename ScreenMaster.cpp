@@ -65,8 +65,10 @@ namespace hsg {
 	if(m_pActiveScreen){
 	    m_pActiveScreen->deactivate();
 	}
-
-	m_pActiveScreen.reset(new GameScreen());
+	
+	GameLayout gameLayout(m_context->coordSystem);
+	gameLayout.loadLevel("level.xml");
+	m_pActiveScreen.reset(new GameScreen(&gameLayout));
 	m_pActiveScreen->activate();
     }
 
