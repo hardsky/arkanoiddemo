@@ -15,11 +15,11 @@ namespace hsg {
 	m_layout = *layout;
     }
 
-    void Bat::spawn(){
+    void Brick::spawn(){
 	m_physics->initialize(m_layout.center.x, m_layout.center.y, 0.0f, 0.0f);
     }
 
-    void Bat::update(){
+    void Brick::update(){
     }
 
     Brick::~Brick() {
