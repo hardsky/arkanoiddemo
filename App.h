@@ -14,9 +14,10 @@ namespace hsg {
 	~App();
 	void run();
     private:
-	CoordSystem* m_pCoordsService;
-	GraphicsService* m_pGraphicsService;
-	EventDispatcher m_eventDispatcher;
+	CoordSystem m_coordSystem;
+	GraphicsService m_graphicsService;
+	EventDispatcher m_appQueue;
+	EventDispatcher m_gameQueue;
 	EventLoop m_eventLoop;
 	boost::thread m_gameThread;
 

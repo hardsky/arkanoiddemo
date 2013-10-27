@@ -4,10 +4,11 @@
 #include "GraphicsSprite.h"
 #include "GraphicsTexture.h"
 #include "Types.h"
-#include "Interfaces/ICoordListener.h"
+#include "ICoordListener.h"
+#include "IEventListener.h"
 
 namespace hsg {
-    class GraphicsService: public ICoordListener {
+    class GraphicsService: public ICoordListener, public IEventListener {
     public:
     	GraphicsService();
         ~GraphicsService();
@@ -15,6 +16,8 @@ namespace hsg {
         status start();
         void stop();
         status update();
+
+	void onEvent(void* data);//SYSTEM_VIDEO_INIT is occured
 
         GraphicsTexture* registerTexture(const char* sName);
         GraphicsTexture* registerTexture(const char* sName, const Size_i& desiredSize);

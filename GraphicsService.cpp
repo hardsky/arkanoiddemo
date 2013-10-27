@@ -17,16 +17,12 @@ namespace hsg {
 GraphicsService::GraphicsService() :
 	m_Textures(),
 	m_Sprites(){
-    Log::info("Creating GraphicsService.");
 }
 
 GraphicsService::~GraphicsService() {
-	Log::info("Destructing GraphicsService.");
 }
 
 status GraphicsService::start() {
-	Log::info("Starting GraphicsService.");
-
 	// Displays information about OpenGL.
 	Log::info("Starting GraphicsService");
 	Log::info("Version  : %s", glGetString(GL_VERSION));
@@ -170,4 +166,7 @@ bool GraphicsService::isTextureExisted(const char* sName) {
 				!= m_Textures.end();
 }
 
+    void GraphicsService::onEvent(void* data){
+	start();
+    }
 }
