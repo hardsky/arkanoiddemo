@@ -1,30 +1,34 @@
 #ifndef HSG_PHYSICSSERVICE_H_
 #define HSG_PHYSICSSERVICE_H_
 
+#include "Types.h"
+#include "PhysicsObject.h"
 #include <Box2D.h>
 
 namespace hsg {
 
-class PhysicsService: private b2ContactListener {
-public:
-public:
-    PhysicsService(TimeService* pTimeService);
+    class TimeService;
 
-    PhysicsObject::ptr registerEntity(uint16 pCategory,
-        uint16 pMask, int32_t pDiameter, float pRestitution);
-    status update();
+    class PhysicsService: private b2ContactListener {
+    public:
+	PhysicsService(TimeService* pTimeService);
 
-private:
-    void BeginContact(b2Contact* pContact);
+	PhysicsObject::ptr registerEntity(uint16 pCategory,
+					  uint16 pMask, int32_t pDiameter, float pRestitution);
+	status update();
 
-private:
-    TimeService* mTimeService;
-    PhysicsObject::vec mColliders;
-    b2World mWorld;
+    private:
+	void BeginContact(b2Contact* pContact);
 
-    static const int32_t VELOCITY_ITER = 6;
-    static const int32_t POSITION_ITER = 2;
-};
+    private:
+	TimeService* mTimeService;
+	PhysicsObject::vec mColliders;
+	b2World mWorld;
+
+	static const int32_t VELOCITY_ITER = 6;
+	static const int32_t POSITION_ITER = 2;
+    };
 
 } /* namespace hsg */
+
 #endif /* HSG_PHYSICSSERVICE_H_ */

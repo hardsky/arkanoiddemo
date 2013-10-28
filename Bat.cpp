@@ -33,26 +33,22 @@ namespace hsg {
 	switch(event->getType()){
 	case SYSTEM_KEY_LEFT_DOWN:
 	{
-	    Vector3 pos  = m_physics.m_location;
-	    m_physics->initialize(pos.x, pos.y, -1 * VELOCITY_X, 0.0f);
+	    m_physics->setVelocity(-1 * VELOCITY_X, 0.0f);
 	}
 	break;
 	case SYSTEM_KEY_RIGHT_DOWN:
 	{
-	    Vector3 pos  = m_physics.m_location;
-	    m_physics->initialize(pos.x, pos.y, VELOCITY_X, 0.0f);
+	    m_physics->setVelocity(VELOCITY_X, 0.0f);
 	}
 	break;
 	case SYSTEM_KEY_LEFT_UP:
 	{
-	    Vector3 pos  = m_physics.m_location;
-	    m_physics->initialize(pos.x, pos.y, 0.0f, 0.0f);
+	    m_physics->setVelocity(0.0f, 0.0f);
 	}
 	break;
 	case SYSTEM_KEY_RIGHT_UP:
 	{
-	    Vector3 pos  = m_physics.m_location;
-	    m_physics->initialize(pos.x, pos.y, 0.0f, 0.0f);
+	    m_physics->setVelocity(0.0f, 0.0f);
 	}
 	break;
 	}

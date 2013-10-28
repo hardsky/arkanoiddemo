@@ -1,14 +1,12 @@
 #ifndef HSG_COORDSYSTEM_H_
 #define HSG_COORDSYSTEM_H_
 
-#include "Interfaces/ICoordListener.h"
-#include "Math/Vector3.h"
-#include "Math/Rect.h"
+#include "ICoordListener.h"
+#include "Vector3.h"
+#include "Rect.h"
 #include "Types.h"
 
 #include <vector>
-
-using namespace gameplay;
 
 namespace hsg {
 
@@ -17,7 +15,7 @@ public:
 	CoordSystem();
 	virtual ~CoordSystem();
 
-	Vector3 toGameCoords(int x, int y);
+	gameplay::Vector3 toGameCoords(int x, int y);
 	Size_i toScreenSize(float fWidth, float fHeight);
 	void registerListerner(ICoordListener* pListener);
 	void update(int nScreenWidth, int nScreenHeight);
@@ -26,11 +24,11 @@ public:
 	float right(){return m_fRight;}
 	float top(){return m_fTop;}
 	float bottom(){return m_fBottom;}
-	const Vector3& center()const{return m_Center;}
+	const gameplay::Vector3& center()const{return m_Center;}
 	void operator()(ICoordListener* pListener);
 	Rect getViewPort();
 
-	void setCenter(const Vector3& coords);
+	void setCenter(const gameplay::Vector3& coords);
 	void setEdges(float fLeft, float fRight, float fBottom, float fTop);
 
 private:
@@ -40,7 +38,7 @@ private:
 	float m_fRight;
 	float m_fTop;
 	float m_fBottom;
-	Vector3 m_Center;
+	gameplay::Vector3 m_Center;
 	Size_f m_ViewSz;
 	Size_f m_ViewFactor;//ViewCoordinates = m_ViewFactor * ScreenCoordinates;
 	Size_f m_ScreenFactor;//ScreenCoordinates = m_ScreenFactor * ViewCoordinates;

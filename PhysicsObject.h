@@ -20,6 +20,7 @@ public:
     void initialize(float pX, float pY,
         float pVelocityX, float pVelocityY);
     void update();
+    void setVelocity(float velocityX, float velocityY);
 
     bool m_collide;
     Vector3 m_location;

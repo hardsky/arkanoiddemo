@@ -3,19 +3,19 @@
 
 #include "GraphicsSprite.h"
 #include "GraphicsTexture.h"
-#include "Types.h"
 #include "ICoordListener.h"
 #include "IEventListener.h"
 
 namespace hsg {
+
     class GraphicsService: public ICoordListener, public IEventListener {
     public:
     	GraphicsService();
         ~GraphicsService();
 
-        status start();
+        void start();
         void stop();
-        status update();
+        void update();
 
 	void onEvent(const Event::ptr& event);//SYSTEM_VIDEO_INIT is occured
 
@@ -27,8 +27,8 @@ namespace hsg {
 
     protected:
 
-        status loadResources();
-        status unloadResources();
+        void loadResources();
+        void unloadResources();
         void setup();
         void setupMatrix(int width, int height, bool scale=false);
 

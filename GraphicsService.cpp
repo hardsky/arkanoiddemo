@@ -7,8 +7,7 @@
 
 #include "GraphicsService.h"
 #include "Log.h"
-#include "Resource.h"
-#include "Math/Rect.h"
+#include "Rect.h"
 #include "CoordSystem.h"
 #include "PngLoader.h"
 

@@ -1,10 +1,11 @@
 #include "PhysicsService.hpp"
 #include "Log.hpp"
 
-namespace packt {
+namespace hsg {
+
     PhysicsService::PhysicsService(TimeService* pTimeService) :
-      mTimeService(pTimeService),
-      mColliders(), mWorld(b2Vec2_zero) {
+	mTimeService(pTimeService),
+	mColliders(), mWorld(b2Vec2_zero) {
         mWorld.SetContactListener(this);
     }
 
@@ -12,7 +13,7 @@ namespace packt {
         uint16 pCategory, uint16 pMask, int32_t pDiameter,
         float pRestitution) {
         PhysicsObject::ptr lCollider(new PhysicsObject(pCategory,
-            pMask, pDiameter, pRestitution, &mWorld));
+						       pMask, pDiameter, pRestitution, &mWorld));
         mColliders.push_back(lCollider);
         return mColliders.back();
     }

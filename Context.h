@@ -4,14 +4,12 @@
 namespace hsg{
     class CoordSystem;
     class GraphicsService;
-    class InputService;
     class TimeService;
     class EventDispatcher;
 
     struct Context{
 	CoordSystem* coordService;
 	GraphicsService* graphicsService;
-	InputService* inputService;
 	TimeService* timeService;
 	EventDispatcher* appQueue;
 	EventDispatcher* gameQueue;
