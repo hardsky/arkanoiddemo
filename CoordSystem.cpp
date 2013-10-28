@@ -35,7 +35,7 @@ namespace hsg {
 	return Size_i(fWidth * m_ScreenFactor.Width, fHeight * m_ScreenFactor.Height);
     }
 
-    void CoordSystem::registerListerner(ICoordListener* pListener) {
+    void CoordSystem::registerListener(ICoordListener* pListener) {
 	m_Listeners.push_back(pListener);
     }
 

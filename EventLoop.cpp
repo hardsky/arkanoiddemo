@@ -11,7 +11,7 @@ namespace hsg {
     }
 
     void EventLoop::operator()(){
-	while(m_run.load(boost::memory_order_accure)){
+	while(m_run){
 	    m_gameQueue->processEvents();	    
 	    m_screenMaster.update();
 	}
@@ -20,7 +20,7 @@ namespace hsg {
     void onEvent(const Event::ptr& event){
 	switch(event->getType()){
 	case EventType::SYSTEM_EXIT:
-	    m_run.store(false, boost::memory_order_release);
+	    m_run = false;
 	    break;
 	}
     }

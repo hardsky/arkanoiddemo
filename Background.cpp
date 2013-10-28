@@ -1,4 +1,5 @@
 #include "Background.h"
+#include "GraphicsService.h"
 
 namespace hsg {
 

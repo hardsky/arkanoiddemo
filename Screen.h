@@ -12,7 +12,7 @@ namespace hsg{
 	virtual void update(){};
 	virtual void activate(){};
 	virtual void deactivate(){};
-    }
+    };
 }
 
 #endif

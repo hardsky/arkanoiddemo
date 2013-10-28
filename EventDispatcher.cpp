@@ -1,4 +1,6 @@
-#include "EventService.h"
+#include "EventDispatcher.h"
+#include "IEventListener.h"
+
 #include <boost/thread/locks.hpp>
 #include <algorithm>
 

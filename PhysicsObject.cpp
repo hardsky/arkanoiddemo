@@ -29,6 +29,10 @@ namespace hsg {
         mBodyObj->SetUserData(this);
     }
 
+    PhysicsObject::PhysicsObject(uint16 pCategory, uint16 pMask,
+		  int32_t width, int32_t height, float pRestitution, b2World* pWorld){
+    }
+
     PhysicsTarget::ptr PhysicsObject::createTarget(float pFactor) {
         return PhysicsTarget::ptr(
             new PhysicsTarget(mWorld, mBodyObj, mLocation, pFactor));

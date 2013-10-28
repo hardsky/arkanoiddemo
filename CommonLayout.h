@@ -1,7 +1,10 @@
 #ifndef HSG_COMMONLAYOUT_H
 #define HSG_COMMONLAYOUT_H
 
-namspace hsg {
+#include "Vector3.h"
+#include <string>
+
+namespace hsg {
 
     struct BackgroundLayout {
 	float width;

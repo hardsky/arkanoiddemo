@@ -1,6 +1,7 @@
 #ifndef HSG_PHYSICSOBJECT_H_
 #define HSG_PHYSICSOBJECT_H_
 
+#include "Vector3.h"
 #include <Box2D.h>
 #include <boost/shared_ptr.hpp>
 #include <vector>
@@ -17,13 +18,16 @@ public:
     PhysicsObject(uint16 pCategory, uint16 pMask,
         int32_t pDiameter, float pRestitution, b2World* pWorld);
 
+    PhysicsObject(uint16 pCategory, uint16 pMask,
+		  int32_t width, int32_t height, float pRestitution, b2World* pWorld);
+
     void initialize(float pX, float pY,
         float pVelocityX, float pVelocityY);
     void update();
     void setVelocity(float velocityX, float velocityY);
 
     bool m_collide;
-    Vector3 m_location;
+    gameplay::Vector3 m_location;
 
 private:
     b2World* m_world;

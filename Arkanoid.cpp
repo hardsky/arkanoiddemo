@@ -1,5 +1,8 @@
 #include "Arkanoid.h"
 #include "GameLayout.h"
+#include "TimeService.h"
+#include "PhysicsService.h"
+#include "EventDispatcher.h"
 
 namespace hsg {
 
@@ -18,7 +21,7 @@ namespace hsg {
     Arkanoid::~Arkanoid() {
 	// TODO Auto-generated destructor stub
     }
-    Arkanoid::update() {
+    void Arkanoid::update() {
         m_timeService->update();
 
 
@@ -26,22 +29,22 @@ namespace hsg {
 	m_bat->update();
 	m_wall->update();
 
-	m_appQueue.postEvent(EventType::SYSTEM_VIDEO_UPDATE);
+	m_appQueue->postEvent(Event::ptr(new Event(SYSTEM_VIDEO_UPDATE)));
 	m_physicsService->update();
     }
 
-    Arkanoid::activate() {	
-	m_physicsService->start();
-	m_timeService->start();
+    void Arkanoid::activate() {	
+	//m_physicsService->start();
+	//m_timeService->start();
 
 	m_ball->spawn();
 	m_bat->spawn();
 	m_wall->spawn();
     }
 
-    Arkanoid::deactivate() {
-	m_timeService->stop();
-	m_physicsService->stop();
+    void Arkanoid::deactivate() {
+	//m_timeService->stop();
+	//m_physicsService->stop();
     }
 
 } /* namespace hsg */

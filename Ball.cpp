@@ -1,16 +1,18 @@
 #include "Ball.h"
+#include "PhysicsService.h"
+#include "GraphicsService.h"
 
 namespace hsg {
 
     Ball::Ball(Context* context, BallLayout* layout):
 	m_graphics(context->graphicsService){
 
-        m_physics = context->m_physicsService->registerEntity(
+        m_physics = context->physicsService->registerEntity(
 	    0X1, 0x2, layout->diameter, 1.0f);
 
 	m_sprite=m_graphics->registerSprite(
 	    m_graphics->registerTexture(layout->fileName.c_str()),
-	    layout->diameter, layout->diameter, &m_physics->m_location);
+	    layout->diameter, layout->diameter, m_physics->m_location);
 
 	m_layout = *layout;
 
@@ -22,9 +24,11 @@ namespace hsg {
 
     void Ball::spawn(){
 	m_physics->initialize(m_layout.center.x, m_layout.center.y, 0.0f, 0.0f);
+	m_sprite->setLocation(m_physics->m_location);
     }
 
     void Ball::update(){
+	m_sprite->setLocation(m_physics->m_location);
     }
 
 } /* namespace hsg */

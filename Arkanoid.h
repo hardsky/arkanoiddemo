@@ -2,13 +2,11 @@
 #define HSG_ARKANOID_H_
 
 #include "Context.h"
-#include "TimeService.h"
-#include "PhysicsService.h"
-
 #include "Background.h"
 #include "Bat.h"
 #include "Ball.h"
 #include "Wall.h"
+#include "Screen.h"
 
 #include <boost/scoped_ptr.hpp>
 #include <vector>
@@ -25,6 +23,7 @@ namespace hsg {
 	void update();
 	void activate();
 	void deactivate();
+
     private:
 	TimeService* m_timeService;
 	PhysicsService* m_physicsService;

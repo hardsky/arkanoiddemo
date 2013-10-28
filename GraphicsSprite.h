@@ -2,7 +2,7 @@
 #define _HSG_GRAPHICSSPRITE_H_
 
 #include "GraphicsTexture.h"
-#include "Math/Vector3.h"
+#include "Vector3.h"
 #include "Types.h"
 
 #include <boost/shared_ptr.hpp>

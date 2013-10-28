@@ -8,8 +8,10 @@
 
 namespace hsg {
 
-class EventDispatcher {
-public:
+    class IEventListener;
+
+    class EventDispatcher {
+    public:
 	EventDispatcher();
 	~EventDispatcher();
 
@@ -18,10 +20,7 @@ public:
 	void subscribe(EventType enType, IEventListener* listener);
 	void unsubscribe(EventType enType, IEventListener* listener);
 
-private:
-	void swapQueues();
-
-private:
+    private:
 	Event::vec m_firstQueue;
 	Event::vec m_secondQueue;
 
@@ -34,7 +33,7 @@ private:
 
 	void swapQueues();
 	void processEvent(const Event::ptr& event);
-};
+    };
 
 } /* namespace hsg */
 #endif /* HSG_EVENTDISPATCHER_H_ */

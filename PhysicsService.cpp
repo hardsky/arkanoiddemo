@@ -18,6 +18,15 @@ namespace hsg {
         return mColliders.back();
     }
 
+    PhysicsObject::ptr PhysicsService::registerEntity(uint16 pCategory,
+						      uint16 pMask, int32_t width, int32_t height, float pRestitution){
+        PhysicsObject::ptr lCollider(new PhysicsObject(pCategory,
+						       pMask, width, height, pRestitution, &mWorld));
+        mColliders.push_back(lCollider);
+        return mColliders.back();
+    }
+
+
     status PhysicsService::update() {
         // Clears collision flags.
         PhysicsObject::vec_it iCollider = mColliders.begin();

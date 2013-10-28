@@ -58,7 +58,7 @@ namespace hsg {
 	int zindex;
 
     private:
-	void parseMosaic(xml_node<> *mosaicNode);
+	void parseMosaic(rapidxml::xml_node<> *mosaicNode);
     };    
 }
 

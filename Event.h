@@ -1,6 +1,7 @@
 #ifndef HSG_EVENT_H_
 #define HSG_EVENT_H_
 
+#include "EventType.h"
 #include <boost/shared_ptr.hpp>
 #include <vector>
 
@@ -13,7 +14,7 @@ public:
 public:
 	Event(EventType type);
 	virtual ~Event();
-	viretual EventType getEventType();
+	virtual EventType getEventType();
 };
 
 } /* namespace hsg */

@@ -1,8 +1,7 @@
 #ifndef _HSG_GRAPHICSTEXTURE_H_
 #define _HSG_GRAPHICSTEXTURE_H_
 
-#include "Interfaces/IImageLoader.h"
-#include "Resource.h"
+#include "IImageLoader.h"
 #include "Types.h"
 
 #include <GL/gl.h>

@@ -5,13 +5,11 @@
 #include "ScreenMaster.h"
 #include "IEventListener.h"
 
-#include <boost/atomic.hpp>
-
 namespace hsg {
 
     class EventDispatcher;
 
-    class EventLoop: IEventListener {
+    class EventLoop: public IEventListener {
     public:
 	EventLoop(Context* context);
 	~EventLoop();
@@ -23,7 +21,7 @@ namespace hsg {
 	EventDispatcher* m_gameQueue;
 	ScreenMaster m_screenMaster;
 	
-	boost::atomic<bool> m_run;
+	volatile bool m_run;
     };
 
 } /* namespace hsg */

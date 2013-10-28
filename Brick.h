@@ -1,6 +1,7 @@
 #ifndef HSG_BRICK_H_
 #define HSG_BRICK_H_
 
+#include "Context.h"
 #include "PhysicsObject.h"
 #include "GraphicsSprite.h"
 
@@ -23,7 +24,7 @@ public:
 
 private:
 	GraphicsService* m_graphicsService;
-	PhysicsObject* m_physics;
+	PhysicsObject::ptr m_physics;
 	GraphicsSprite* m_sprite;
 	BrickLayout m_layout;
 };

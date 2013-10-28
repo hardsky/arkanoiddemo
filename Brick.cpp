@@ -1,25 +1,29 @@
 #include "Brick.h"
+#include "PhysicsService.h"
+#include "GraphicsService.h"
 
 namespace hsg {
 
     Brick::Brick(Context* context, BrickLayout* layout):
 	m_graphicsService(context->graphicsService){
 
-        m_physics = context->m_physicsService->registerEntity(
+        m_physics = context->physicsService->registerEntity(
 	    0X1, 0x2, layout->width, layout->height, 1.0f);
 
 	m_sprite=m_graphicsService->registerSprite(
 	    m_graphicsService->registerTexture(layout->fileName.c_str()),
-	    layout->width, layout->height, &m_physics->m_location);
+	    layout->width, layout->height, m_physics->m_location);
 
 	m_layout = *layout;
     }
 
     void Brick::spawn(){
 	m_physics->initialize(m_layout.center.x, m_layout.center.y, 0.0f, 0.0f);
+	m_sprite->setLocation(m_physics->m_location);
     }
 
     void Brick::update(){
+	m_sprite->setLocation(m_physics->m_location);
     }
 
     Brick::~Brick() {

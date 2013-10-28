@@ -1,6 +1,12 @@
 #ifndef HSG_APP_H_
 #define HSG_APP_H_
 
+#include "Context.h"
+#include "CoordSystem.h"
+#include "GraphicsService.h"
+#include "TimeService.h"
+#include "PhysicsService.h"
+
 #include "EventDispatcher.h"
 #include "EventLoop.h"
 
@@ -11,7 +17,7 @@ namespace hsg {
 
     class App: public IEventListener {
     public:
-	App();
+	App(int argc, char* argv[]);
 	~App();
 	void run();
     private:

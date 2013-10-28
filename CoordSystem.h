@@ -17,7 +17,7 @@ public:
 
 	gameplay::Vector3 toGameCoords(int x, int y);
 	Size_i toScreenSize(float fWidth, float fHeight);
-	void registerListerner(ICoordListener* pListener);
+	void registerListener(ICoordListener* pListener);
 	void update(int nScreenWidth, int nScreenHeight);
 
 	float left(){return m_fLeft;}

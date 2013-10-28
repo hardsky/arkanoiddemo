@@ -22,6 +22,8 @@ namespace hsg {
         GraphicsTexture* registerTexture(const char* sName);
         GraphicsTexture* registerTexture(const char* sName, const Size_i& desiredSize);
         GraphicsSprite* registerSprite(const char* sName, int nLayer=0);
+        GraphicsSprite* registerSprite(GraphicsTexture* pImage,
+            float pHeight, float pWidth, const Vector3& pLocation, int nLayer=0);
         void unregisterSprite(GraphicsSprite* pSprite);
         void onCoordsUpdate(CoordSystem* pCoords);
 

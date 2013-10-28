@@ -15,6 +15,8 @@ namespace hsg {
 
 	PhysicsObject::ptr registerEntity(uint16 pCategory,
 					  uint16 pMask, int32_t pDiameter, float pRestitution);
+	PhysicsObject::ptr registerEntity(uint16 pCategory,
+					  uint16 pMask, int32_t width, int32_t height, float pRestitution);
 	status update();
 
     private:
