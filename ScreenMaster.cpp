@@ -8,9 +8,12 @@ namespace hsg {
 
     ScreenMaster::ScreenMaster(Context* context):
 	m_context(context){
+	
+	m_context->subscribe(EventType::GAME_START, this);
     }
 
     ScreenMaster::~ScreenMaster() {
+	m_context->unsubscribe(EventType::GAME_START, this);
     }
 
     void ScreenMaster::update(){
@@ -37,6 +40,14 @@ namespace hsg {
 	gameLayout.loadLevel("level.xml");
 	m_activeScreen.reset(new Arkanoid(m_context, &gameLayout));
 	m_activeScreen->activate();
+    }
+    
+    void onEvent(const Event::ptr& event){
+	switch(event->getType){
+	case EventType::GAME_START:
+	    gameScreen();
+	    break;
+	}
     }
 
 } /* namespace hsg */

@@ -13,7 +13,7 @@ public:
 public:
 	Event(EventType type);
 	virtual ~Event();
-	EventType getEventType();
+	viretual EventType getEventType();
 };
 
 } /* namespace hsg */

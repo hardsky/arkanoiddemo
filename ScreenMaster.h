@@ -2,10 +2,12 @@
 #define HSG_SCREENMASTER_H_
 
 #include "Context.h"
+#include "IEventListener.h"
+#include "Screen.h"
 
 namespace hsg {
 
-    class ScreenMaster {
+    class ScreenMaster: public IEventListener {
     public:
 	ScreenMaster(Context* context);
 	~ScreenMaster();
@@ -14,11 +16,12 @@ namespace hsg {
 
 	void startScreen();
 	void gameScreen();
+	
+	void onEvent(const Event::ptr& event);
 	    
     private:
 	Context* m_context;
 	Screen::ptr m_activeScreen;
-	InputService m_inputService;
     };
 
 } /* namespace hsg */
