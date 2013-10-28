@@ -1,27 +1,36 @@
 #include "App.h"
+#include "EventType.h"
 #include <GL/glut.h>
 
 namespace hsg {
 
     App::App(): m_eventLoop(&m_appQueue, &m_gameQueue) {
 	
-	m_eventDispatcher.registerListener(&m_graphicsService);
+	m_appQueue.subscribe(EventType::SYSTEM_VIDEO_INIT, &m_graphicsService);
+	m_appQueue.subscribe(EventType::SYSTEM_VIDEO_UPDATE, this);
+
+	m_coordSystem.registerListener(&m_graphics);
 
 	glutInit(&argc, argv);
-	glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB);
-	glutInitWindowSize (250, 250);
-	glutInitWindowPosition (100, 100);
-	glutCreateWindow (argv[0]);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+	glutInitWindowSize(480, 640);
+	glutInitWindowPosition(100, 100);
+	glutCreateWindow(argv[0]);
 
 	App::_instance = this;
     }
 
     App::~App() {
-	// TODO Auto-generated destructor stub
     }
 
-    App::~App() {
-	App::_instance = 0;
+
+    void App::OnEvent(const Event::ptr& event){
+	switch(event->getType()){
+	case EventType::SYSTEM_VIDEO_UPDATE:
+	    glutPostRedisplay();
+	    break;
+	}
+
     }
 
     void App::run(){
@@ -33,12 +42,12 @@ namespace hsg {
 
 	m_gameThread = boost::thread(boost::ref(m_eventLoop));
 	glutMainLoop();
-	m_gameQueue.postExit();
+	m_gameQueue.postEvent(Event::ptr(new Event(EventType::SYSTEM_EXIT)));
 	m_gameThread.join();
     }
 
     void App::draw(){
-	m_pGraphicsService->draw();
+	m_pGraphicsService->update();
     }
 
     void App::changeSize(int width, int height){
@@ -47,32 +56,29 @@ namespace hsg {
 
     void App::click(int button, int state, int x, int y){
 	if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
-	    m_gameQueue.postClick(x, y);
+	    m_gameQueue.postEvent(Event::ptr(new EventClick(x, y)));
 	}
     }
 
     void App::update(){
 	m_appQueue.update();
-	if(m_eventDispatcher.isVideoRequested()){
-	    glutPostRedisplay();
-	}
     }
 
     void App::specialKeyPress(int key, int x, int y){
 	if(key == GLUT_KEY_LEFT){
-	    m_gameQueue.postLeftKeyPress();
+	    m_gameQueue.postEvent(Event::ptr(new Event(EventType::SYSTEM_KEY_LEFT_DOWN)));
 	}
 	else if(key == GLUT_KEY_RIGHT){
-	    m_gameQueue.postRightKeyPress();
+	    m_gameQueue.postEvent(Event::ptr(new Event(EventType::SYSTEM_KEY_RIGHT_DOWN)));
 	}
     }
 
     void App::specialKeyUp(int key, int x, int y){
 	if(key == GLUT_KEY_LEFT){
-	    m_gameQueue.postLeftKeyUp();
+	    m_gameQueue.postEvent(Event::ptr(new Event(EventType::SYSTEM_KEY_LEFT_UP)));
 	}
 	else if(key == GLUT_KEY_RIGHT){
-	    m_gameQueue.postRightKeyUp();
+	    m_gameQueue.postEvent(Event::ptr(new Event(EventType::SYSTEM_KEY_RIGHT_UP)));
 	}
     }
 

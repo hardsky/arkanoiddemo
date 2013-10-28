@@ -11,7 +11,7 @@ public:
 	typedef boost::shared_ptr<Event> ptr;
 	typedef std::vector<ptr> vec;
 public:
-	Event();
+	Event(EventType type);
 	virtual ~Event();
 	EventType getEventType();
 };

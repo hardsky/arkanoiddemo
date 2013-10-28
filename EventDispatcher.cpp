@@ -16,6 +16,7 @@ namespace hsg {
 
     void EventDispatcher::postEvent(const Event::ptr& event) {
 	boost::lock_guard<boost::recursive_mutex> guard(m_rmx);
+	m_pendingQueue->push_back(event);
     }
 
     void EventDispatcher::update() {

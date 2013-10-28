@@ -7,7 +7,7 @@ namespace hsg {
 
     class EventLoop {
     public:
-	EventLoop(EventDispatcher* eventDispatcher);
+	EventLoop(EventDispatcher* appQueue, EventDispatcher* gameQueue);
 	virtual ~EventLoop();
 
 	void operator()();

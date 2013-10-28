@@ -6,7 +6,7 @@ namespace hsg {
     public:
 	virtual ~IEventListener(){}
 	
-	virtual void onEvent(const Event::ptr& event);
+	virtual void onEvent(const Event::ptr& event) = 0;
     }
 }
 
