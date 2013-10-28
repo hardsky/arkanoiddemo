@@ -2,25 +2,20 @@
 #define HSG_CONTEXT_H_
 
 namespace hsg{
-	class CoordSystem;
-	class GraphicsService;
-	class InputService;
-	class TimeService;
-	class AnimationService;
-	class ScoreService;
-	class FieldLayout;
-	class TaskService;
+    class CoordSystem;
+    class GraphicsService;
+    class InputService;
+    class TimeService;
+    class EventDispatcher;
 
-	struct Context{
-		CoordSystem* mCoordService;
-		GraphicsService* mGraphicsService;
-		InputService* mInputService;
-		TimeService* mTimeService;
-		AnimationService* mAnimationService;
-		ScoreService* mScore;
-		FieldLayout* mLayout;
-		TaskService* mTaskService;
-	};
+    struct Context{
+	CoordSystem* coordService;
+	GraphicsService* graphicsService;
+	InputService* inputService;
+	TimeService* timeService;
+	EventDispatcher* appQueue;
+	EventDispatcher* gameQueue;
+    };
 }
 
 #endif /* HSG_CONTEXT_H_ */

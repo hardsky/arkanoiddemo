@@ -5,20 +5,22 @@
 #include "EventLoop.h"
 
 #include <boost/thread.hpp>
+#include <boost/scoped_ptr.hpp>
 
 namespace hsg {
 
-    class App {
+    class App: public IEventListener {
     public:
 	App();
 	~App();
 	void run();
     private:
+	Context m_context;
 	CoordSystem m_coordSystem;
 	GraphicsService m_graphicsService;
 	EventDispatcher m_appQueue;
 	EventDispatcher m_gameQueue;
-	EventLoop m_eventLoop;
+	boost::scoped_ptr<EventLoop> m_eventLoop;
 	boost::thread m_gameThread;
 
 	void draw();
@@ -27,6 +29,8 @@ namespace hsg {
 	void update();
 	void specialKeyPress(int key, int x, int y);
 	void specialKeyUp(int key, int x, int y);
+
+	void onEvent(const Event::ptr& event);
 
 	static App* _instance;
 	static void draw_callback();

@@ -6,7 +6,7 @@
 
 namespace hsg {
 
-class Bat {
+    class Bat: public IEventListener {
 public:
 	Bat(Context* context, BatLayout* layout);
 	~Bat();
@@ -14,7 +14,11 @@ public:
 	void spawn();
 	void update();
 
+	void onEvent(const Event::ptr& event);
+
 private:
+	const float VELOCITY_X;
+
 	GraphicsService* m_graphicsService;
 	PhysicsObject* m_physics;
 	GraphicsSprite* m_sprite;

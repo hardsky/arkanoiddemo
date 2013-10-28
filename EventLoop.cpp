@@ -1,10 +1,11 @@
 #include "EventLoop.h"
+#include "EventDispatcher.h"
 
 namespace hsg {
 
-    EventLoop::EventLoop(EventDispatcher* appQueue, EventDispatcher* gameQueue):
-	m_eventMaster(appQueue, gameQueue),
-	m_screenMaster(&m_eventMaster),
+    EventLoop::EventLoop(Context* context):
+	m_gameQueue(context->gameQueue),
+	m_screenMaster(context),
 	m_run(true){
 
     }

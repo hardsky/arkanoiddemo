@@ -1,20 +1,26 @@
 #ifndef HSG_EVENTLOOP_H_
 #define HSG_EVENTLOOP_H_
 
-#include "EventDispatcher.h"
+#include "Context.h"
+#include "ScreenMaster.h"
+#include "IEventListener.h"
+
 #include <boost/atomic.hpp>
 
 namespace hsg {
 
-    class EventLoop {
-    public:
-	EventLoop(EventDispatcher* appQueue, EventDispatcher* gameQueue);
-	virtual ~EventLoop();
+    class EventDispatcher;
 
-	void operator()();
+    class EventLoop: IEventListener {
+    public:
+	EventLoop(Context* context);
+	~EventLoop();
+
+	void operator()();	
+	void onEvent(const Event::ptr& event);
+
     private:
 	EventDispatcher* m_gameQueue;
-	EventMaster m_eventMaster;
 	ScreenMaster m_screenMaster;
 	
 	boost::atomic<bool> m_run;

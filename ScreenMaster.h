@@ -1,11 +1,13 @@
 #ifndef HSG_SCREENMASTER_H_
 #define HSG_SCREENMASTER_H_
 
+#include "Context.h"
+
 namespace hsg {
 
     class ScreenMaster {
     public:
-	ScreenMaster(EventDispatcher* eventDispatcher);
+	ScreenMaster(Context* context);
 	~ScreenMaster();
 	
 	void update();
@@ -14,7 +16,8 @@ namespace hsg {
 	void gameScreen();
 	    
     private:
-	Screen::ptr m_pActiveScreen;
+	Context* m_context;
+	Screen::ptr m_activeScreen;
 	InputService m_inputService;
     };
 

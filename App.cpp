@@ -4,8 +4,7 @@
 
 namespace hsg {
 
-    App::App():
-	m_eventLoop(&m_appQueue, &m_gameQueue) {
+    App::App(): {
 	
 	m_appQueue.subscribe(EventType::SYSTEM_VIDEO_INIT, &m_graphicsService);
 	m_appQueue.subscribe(EventType::SYSTEM_VIDEO_UPDATE, this);
@@ -18,6 +17,14 @@ namespace hsg {
 	glutInitWindowSize(480, 640);
 	glutInitWindowPosition(100, 100);
 	glutCreateWindow(argv[0]);
+	
+	m_context = {0};
+	m_context->coorService = &m_coordService;
+	m_context->graphicsService = &m_graphicsService;
+	m_context->appQueue = &m_appQueue;
+	m_context->gameQueue = &m_gameQueue;
+
+	m_eventLoop.reset(new EventLoop(&m_context));
 
 	App::_instance = this;
     }

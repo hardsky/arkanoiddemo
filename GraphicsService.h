@@ -17,7 +17,7 @@ namespace hsg {
         void stop();
         status update();
 
-	void onEvent(void* data);//SYSTEM_VIDEO_INIT is occured
+	void onEvent(const Event::ptr& event);//SYSTEM_VIDEO_INIT is occured
 
         GraphicsTexture* registerTexture(const char* sName);
         GraphicsTexture* registerTexture(const char* sName, const Size_i& desiredSize);

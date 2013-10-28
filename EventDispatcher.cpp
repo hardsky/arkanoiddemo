@@ -19,7 +19,7 @@ namespace hsg {
 	m_pendingQueue->push_back(event);
     }
 
-    void EventDispatcher::update() {
+    void EventDispatcher::processEvents() {
 	swapQueues();
 	for_each(*m_workingQueue, bind(&EventDispatcher::processEvent));
 	m_workingQueue->clear();
