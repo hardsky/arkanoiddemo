@@ -8,11 +8,10 @@ namespace hsg{
     public:
 	typedef boost::shared_ptr<Screen> ptr;
     public:
-	Screen();
-	virtual ~Screen();
-	virtual void update();
-	virtual void activate();
-	virtual void deactivate();
+	virtual ~Screen(){};
+	virtual void update(){};
+	virtual void activate(){};
+	virtual void deactivate(){};
     }
 }
 

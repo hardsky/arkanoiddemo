@@ -4,7 +4,8 @@
 
 namespace hsg {
 
-    App::App(): {
+    App::App():
+    	m_physicsService(&m_timeService){
 	
 	m_appQueue.subscribe(EventType::SYSTEM_VIDEO_INIT, &m_graphicsService);
 	m_appQueue.subscribe(EventType::SYSTEM_VIDEO_UPDATE, this);

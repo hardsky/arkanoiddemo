@@ -18,6 +18,8 @@ namespace hsg {
 	Context m_context;
 	CoordSystem m_coordSystem;
 	GraphicsService m_graphicsService;
+	TimeService m_timeService;
+	PhysicsService m_physicsService;
 	EventDispatcher m_appQueue;
 	EventDispatcher m_gameQueue;
 	boost::scoped_ptr<EventLoop> m_eventLoop;

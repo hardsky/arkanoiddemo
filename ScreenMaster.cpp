@@ -1,18 +1,6 @@
 #include "ScreenMaster.h"
-#include "ScreenLoader.h"
-#include "ResourceFactory.h"
-#include "GameInfoKeeper.h"
-#include "SoundService.h"
-#include "SettingsKeeper.h"
-#include "Screens/GameScreen.h"
-#include "Log.h"
-
-#include <boost/scoped_ptr.hpp>
-#include <boost/range/algorithm/sort.hpp>
-#include <boost/range/algorithm/find_if.hpp>
-#include <boost/range/algorithm/for_each.hpp>
-#include <boost/bind.hpp>
-#include <boost/lexical_cast.hpp>
+#include "StartScreen.h"
+#include "Arkanoid.h"
 
 namespace hsg {
 
@@ -47,7 +35,7 @@ namespace hsg {
 	
 	GameLayout gameLayout(m_context->coordSystem);
 	gameLayout.loadLevel("level.xml");
-	m_activeScreen.reset(new GameScreen(m_context, &gameLayout));
+	m_activeScreen.reset(new Arkanoid(m_context, &gameLayout));
 	m_activeScreen->activate();
     }
 
