@@ -4,6 +4,7 @@
 #include "Event.h"
 #include <boost/thread/recursive_mutex.hpp>
 #include <boost/scoped_ptr.hpp>
+#include <map>
 
 namespace hsg {
 
@@ -20,13 +21,6 @@ private:
 	void swapQueues();
 
 private:
-	struct EventSlot {
-	    typedef boost::scoped_ptr<EventSlot> ptr;
-
-	    EventType eventType;
-	    std::vector<IEventListener*> listeners;
-	}
-
 	Event::vec m_firstQueue;
 	Event::vec m_secondQueue;
 
@@ -35,7 +29,7 @@ private:
 
 	boost::recursive_mutex m_rmx;
 	
-	std::vector<EventSlot::ptr> m_eventSlots;
+	std::map<EventType, IEventListener*> m_listeners;
 
 	bool findSlot(const EventSlot& slot, EventType eventType);
 	void updateListeners(const EventSlot& slot);
