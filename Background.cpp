@@ -2,13 +2,16 @@
 
 namespace hsg {
 
-Background::Background() {
-	// TODO Auto-generated constructor stub
+    Background::Background(Context* context, BackgroundLayout* layout):
+	m_location(layout->center),
+	m_graphics(context->graphicsService),
+	m_sprite(m_graphics->registerSprite(m_graphics->registerTexture(layout->fileName.c_str()), 
+					    layout->width, layout->height, m_location)){
 
-}
+    }
 
-Background::~Background() {
-	// TODO Auto-generated destructor stub
-}
+    Background::~Background() {
+	m_graphics->unregisterSprite(m_sprite);
+    }
 
 } /* namespace hsg */

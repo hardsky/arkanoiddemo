@@ -3,11 +3,17 @@
 
 namespace hsg {
 
-class Background {
-public:
-	Background();
-	virtual ~Background();
-};
+    class Background {
+    public:
+	Background(Context* context, BackgroundLayout* layout);
+	~Background();
+    private:
+	Vector3 m_location;
+	GraphicsService* m_graphics;
+	GraphicsSprite* m_sprite;
+	BackgroundLayout m_layout;
+    };
 
 } /* namespace hsg */
+
 #endif /* HSG_BACKGROUND_H_ */

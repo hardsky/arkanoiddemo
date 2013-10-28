@@ -16,7 +16,7 @@ public:
 	void update();
 
 private:
-	GraphicsService* m_graphicsService;
+	GraphicsService* m_graphics;
 	PhysicsObject* m_physics;
 	GraphicsSprite* m_sprite;
 	BallLayout m_layout;

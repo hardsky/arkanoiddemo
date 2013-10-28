@@ -3,13 +3,13 @@
 namespace hsg {
 
     Ball::Ball(Context* context, BallLayout* layout):
-	m_graphicsService(context->graphicsService){
+	m_graphics(context->graphicsService){
 
         m_physics = context->m_physicsService->registerEntity(
 	    0X1, 0x2, layout->diameter, 1.0f);
 
-	m_sprite=m_graphicsService->registerSprite(
-	    m_graphicsService->registerTexture("ball.png"),
+	m_sprite=m_graphics->registerSprite(
+	    m_graphics->registerTexture(layout->fileName.c_str()),
 	    layout->diameter, layout->diameter, &m_physics->m_location);
 
 	m_layout = *layout;
@@ -17,7 +17,7 @@ namespace hsg {
     }
 
     Ball::~Ball() {
-	// TODO Auto-generated destructor stub
+	m_graphics->unregisterSprite(m_sprite);
     }
 
     void Ball::spawn(){

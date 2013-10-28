@@ -23,6 +23,7 @@ namespace hsg {
     }
 
     Brick::~Brick() {
+	m_graphicsService->unregisterSprite(m_sprite);
     }
 
 } /* namespace hsg */
