@@ -1,8 +1,9 @@
 #include "Arkanoid.h"
+#include "GameLayout.h"
 
 namespace hsg {
 
-    Arkanoid::Arkanoid(Context* context, Gamelayout* layout):
+    Arkanoid::Arkanoid(Context* context, GameLayout* layout):
 	m_timeService(context->timeService),
 	m_physicsService(context->physicsService),
 	m_appQueue(context->appQueue),

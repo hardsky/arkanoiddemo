@@ -5,7 +5,6 @@
 #include "TimeService.h"
 #include "PhysicsService.h"
 
-#include "GameLayout.h"
 #include "Background.h"
 #include "Bat.h"
 #include "Ball.h"
@@ -16,9 +15,11 @@
 
 namespace hsg {
 
+    class GameLayout;
+
     class Arkanoid: public Screen {
     public:
-	Arkanoid(Context* context, Gamelayout* layout);
+	Arkanoid(Context* context, GameLayout* layout);
 	~Arkanoid();
 	
 	void update();
@@ -30,13 +31,10 @@ namespace hsg {
 	EventDispatcher* m_appQueue;
 	EventDispatcher* m_gameQueue;
 	
-	GameLayout m_layout;
 	boost::scoped_ptr<Background> m_background;
 	boost::scoped_ptr<Bat> m_bat;
 	boost::scoped_ptr<Ball> m_ball;
 	boost::scoped_ptr<Wall> m_wall;
-
-	void loadLevel(Level* lvl);
     };
 
 } /* namespace hsg */

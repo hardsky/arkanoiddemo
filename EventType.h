@@ -16,7 +16,8 @@ enum EventType{
     SYSTEM_MOUSE_CLICK = 9,
 
     GAME_BRICK_CRASH = 10,
-    GAME_WIN = 11	
+    GAME_WIN = 11,
+    GAME_START = 12
 };
 
 

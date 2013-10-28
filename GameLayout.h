@@ -1,6 +1,7 @@
 #ifndef HSG_GAMELAYOUT_H
 #define HSG_GAMELAYOUT_H
 
+#include "CommonLayout.h"
 #include "Vector3.h"
 #include "CoordSystem.h"
 #include "rapidxml.hpp"
@@ -10,42 +11,33 @@
 
 namespace hsg {
 
-    using namespace gameplay;
-
-    struct BackgroundLayout {
-	float width;
-	float height;
-	Vector3 center;
-	std::string fileName;
-    }
-
     struct BatLayout {
 	float width;
 	float height;
-	Vector3 center;
+	gameplay::Vector3 center;
 	std::string fileName;
-    }
+    };
 
     struct BallLayout {
 	float diameter;
-	Vector3 center;
+	gameplay::Vector3 center;
 	std::string fileName;
-    }
+    };
 
     struct BrickLayout {
 	float width;
 	float height;
-	Vector3 center;
+	gameplay::Vector3 center;
 	std::string fileName;
-    }
+    };
 
     struct WallLayout {
 	float width;
 	float height;
-	Vector3 center;
+	gameplay::Vector3 center;
 
 	std::vector<BrickLayout> bricks;
-    }
+    };
 
     struct GameLayout {
 	GameLayout(CoordSystem* coordSystem);
@@ -58,11 +50,11 @@ namespace hsg {
 	
 	float width;
 	float height;
-	Vector3 center;
+	gameplay::Vector3 center;
 
     private:
 	void parseMosaic(xml_node<> *mosaicNode);
-    }
+    };    
 }
 
 #endif
