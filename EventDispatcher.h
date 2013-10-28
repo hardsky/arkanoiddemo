@@ -14,7 +14,7 @@ public:
 	~EventDispatcher();
 
 	void postEvent(const Event::ptr& event);
-	void update();
+	void processEvents();
 	void subscribe(EventType enType, IEventListener* listener);
 
 private:
@@ -31,9 +31,8 @@ private:
 	
 	std::map<EventType, IEventListener*> m_listeners;
 
-	bool findSlot(const EventSlot& slot, EventType eventType);
-	void updateListeners(const EventSlot& slot);
-	
+	void swapQueues();
+	void processEvent(const Event::ptr& event);
 };
 
 } /* namespace hsg */

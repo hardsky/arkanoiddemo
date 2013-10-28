@@ -4,10 +4,12 @@
 
 namespace hsg {
 
-    App::App(): m_eventLoop(&m_appQueue, &m_gameQueue) {
+    App::App():
+	m_eventLoop(&m_appQueue, &m_gameQueue) {
 	
 	m_appQueue.subscribe(EventType::SYSTEM_VIDEO_INIT, &m_graphicsService);
 	m_appQueue.subscribe(EventType::SYSTEM_VIDEO_UPDATE, this);
+	m_appQueue.subscribe(EventType::SYSTEM_EXIT, &m_eventLoop);
 
 	m_coordSystem.registerListener(&m_graphics);
 
@@ -24,7 +26,7 @@ namespace hsg {
     }
 
 
-    void App::OnEvent(const Event::ptr& event){
+    void App::onEvent(const Event::ptr& event){
 	switch(event->getType()){
 	case EventType::SYSTEM_VIDEO_UPDATE:
 	    glutPostRedisplay();
@@ -61,7 +63,7 @@ namespace hsg {
     }
 
     void App::update(){
-	m_appQueue.update();
+	m_appQueue.processEvents();
     }
 
     void App::specialKeyPress(int key, int x, int y){

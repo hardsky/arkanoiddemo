@@ -2,6 +2,7 @@
 #define HSG_EVENTLOOP_H_
 
 #include "EventDispatcher.h"
+#include <boost/atomic.hpp>
 
 namespace hsg {
 
@@ -12,8 +13,11 @@ namespace hsg {
 
 	void operator()();
     private:
-	EventDispatcher* m_eventDispatcher;
+	EventDispatcher* m_gameQueue;
+	EventMaster m_eventMaster;
 	ScreenMaster m_screenMaster;
+	
+	boost::atomic<bool> m_run;
     };
 
 } /* namespace hsg */
