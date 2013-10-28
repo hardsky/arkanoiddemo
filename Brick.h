@@ -19,6 +19,7 @@ public:
 
 	void spawn();
 	void update();
+	bool collided() const;
 
 private:
 	GraphicsService* m_graphicsService;

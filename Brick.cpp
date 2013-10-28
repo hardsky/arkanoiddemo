@@ -25,5 +25,9 @@ namespace hsg {
     Brick::~Brick() {
 	m_graphicsService->unregisterSprite(m_sprite);
     }
+    
+    bool Birck::collided(){
+	return m_physics.m_collide;
+    }
 
 } /* namespace hsg */
