@@ -43,6 +43,17 @@ namespace hsg {
 	    vec.push_back(listener);
 	}
 	
+    }
+
+    void EventDispatcher::unsubscribe(EventType enType, IEventListener* listener){
+	boost::lock_guard<boost::recursive_mutex> guard(m_rmx);
+
+	std::map<EventType, std::vector<IEventListener*> >::iterator finded;
+	finded = m_listeners.find(enType);
+	if(finded != m_listeners.end()){
+	    std::vector<IEventListener*>& vec = finded.second;
+	    vec.erase(std::remove(vec.begin(), vec.end(), listener), vec.end());
+	}
     }			
 
     void EventDispatcher::processEvent(const Event::ptr& event){

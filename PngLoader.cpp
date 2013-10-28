@@ -12,7 +12,7 @@ PngLoader::~PngLoader() {
 	// TODO Auto-generated destructor stub
 }
 
-status PngLoader::load(const char* sPath, int32_t nDesiredWidth, int32_t nDesiredHeight) {
+status PngLoader::load(const char* sPath, int32_t nDesiredWidth, int32_t nDesiredeight) {
 	HSG_DEBUG("Loading texture %s", sPath);
 
     png_byte lHeader[8];

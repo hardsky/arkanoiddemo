@@ -31,6 +31,7 @@ namespace hsg {
 	void update();
 	void specialKeyPress(int key, int x, int y);
 	void specialKeyUp(int key, int x, int y);
+	void preloadtextures();
 
 	void onEvent(const Event::ptr& event);
 

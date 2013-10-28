@@ -16,6 +16,7 @@ public:
 	void postEvent(const Event::ptr& event);
 	void processEvents();
 	void subscribe(EventType enType, IEventListener* listener);
+	void unsubscribe(EventType enType, IEventListener* listener);
 
 private:
 	void swapQueues();

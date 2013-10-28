@@ -11,7 +11,7 @@ namespace hsg {
 	m_appQueue.subscribe(EventType::SYSTEM_VIDEO_UPDATE, this);
 	m_appQueue.subscribe(EventType::SYSTEM_EXIT, &m_eventLoop);
 
-	m_coordSystem.registerListener(&m_graphics);
+	m_coordSystem.registerListener(&m_graphicsService);
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
@@ -49,6 +49,8 @@ namespace hsg {
 	glutReshapeFunc(resize_callback);
 	glutMouseFunc(mouse_callback);
 	glutIdleFunc(idle_callback);
+
+	preloadtextures();
 
 	m_gameThread = boost::thread(boost::ref(m_eventLoop));
 	glutMainLoop();
@@ -114,5 +116,19 @@ namespace hsg {
 
     void App::special_key_up_callback(int key, int x, int y){
 	App::_instance->specialKeyUp(key, x, y);
+    }
+
+    void App::preloadtextures(){
+	m_graphicsService->registerTexture("ball.png");
+	m_graphicsService->registerTexture("bat.png");
+	m_graphicsService->registerTexture("blue.png");
+	m_graphicsService->registerTexture("game_screen.png");
+	m_graphicsService->registerTexture("green.png");
+	m_graphicsService->registerTexture("pink.png");
+	m_graphicsService->registerTexture("red.png");
+	m_graphicsService->registerTexture("sea.png");
+	m_graphicsService->registerTexture("start_button.png");
+	m_graphicsService->registerTexture("start_screen.png");
+	m_graphicsService->registerTexture("yellow.png");
     }
 } /* namespace hsg */

@@ -16,12 +16,14 @@ namespace hsg {
 	float height;
 	gameplay::Vector3 center;
 	std::string fileName;
+	int zindex;
     };
 
     struct BallLayout {
 	float diameter;
 	gameplay::Vector3 center;
 	std::string fileName;
+	int zindex;
     };
 
     struct BrickLayout {
@@ -29,6 +31,7 @@ namespace hsg {
 	float height;
 	gameplay::Vector3 center;
 	std::string fileName;
+	int zindex;
     };
 
     struct WallLayout {
@@ -37,6 +40,7 @@ namespace hsg {
 	gameplay::Vector3 center;
 
 	std::vector<BrickLayout> bricks;
+	int zindex;
     };
 
     struct GameLayout {
@@ -51,6 +55,7 @@ namespace hsg {
 	float width;
 	float height;
 	gameplay::Vector3 center;
+	int zindex;
 
     private:
 	void parseMosaic(xml_node<> *mosaicNode);
