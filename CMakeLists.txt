@@ -3,14 +3,13 @@ cmake_minimum_required(VERSION 2.6)
 project(arkanoiddemo)
 
 include_directories ("${PROJECT_SOURCE_DIR}")
-include_directories ("${PROJECT_SOURCE_DIR}/Box2D/Common")
 include_directories ("${PROJECT_SOURCE_DIR}/Box2D")
 add_subdirectory (Box2D)
 
 include_directories ("${PROJECT_SOURCE_DIR}/freeglut")
 add_subdirectory (freeglut)
 
-set (EXTRA_LIBS ${EXTRA_LIBS} Box2D)
+set (EXTRA_LIBS ${EXTRA_LIBS} Box2D freeglut_static)
 
 set(arkanoiddemo_SRCS
 App.cpp
@@ -88,7 +87,11 @@ IImageLoader.h
 rapidxml.hpp
 )
 
-INCLUDE_DIRECTORIES( ${libpng_INCLUDE_DIR} )
+find_package( Boost COMPONENTS thread )
+find_package( Png )
+find_package(OpenGL)
+INCLUDE_DIRECTORIES(${OPENGL_INCLUDE_DIR})
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
+INCLUDE_DIRECTORIES( ${PNG_INCLUDE_DIR} )
 add_executable (arkanoiddemo ${arkanoiddemo_SRCS})
-target_link_libraries (arkanoiddemo  ${EXTRA_LIBS} ${Boost_LIBRARIES} ${libpng})
+target_link_libraries (arkanoiddemo  ${EXTRA_LIBS} ${Boost_LIBRARIES} png ${OPENGL_LIBRARIES})

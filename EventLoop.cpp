@@ -10,6 +10,8 @@ namespace hsg {
 
     }
 
+    EventLoop::~EventLoop(){}
+
     void EventLoop::operator()(){
 	while(m_run){
 	    m_gameQueue->processEvents();	    

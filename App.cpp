@@ -5,6 +5,8 @@
 
 namespace hsg {
 
+    App* App::_instance = 0;
+
     App::App(int argc, char* argv[]):
     	m_physicsService(&m_timeService){
 	

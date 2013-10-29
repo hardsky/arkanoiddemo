@@ -4,6 +4,7 @@
 #include "Context.h"
 #include "ScreenMaster.h"
 #include "IEventListener.h"
+#include "Event.h"
 
 namespace hsg {
 

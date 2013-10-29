@@ -13,7 +13,7 @@ namespace hsg {
 	typedef std::vector<ptr> vec;
     public:
     Event(EventType type):m_type(type){};
-	virtual ~Event();
+	virtual ~Event(){};
 	EventType getEventType() const{return m_type;};
 
     private:
