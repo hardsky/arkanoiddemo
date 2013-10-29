@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 #include <string.h>
+#include <boost/shared_array.hpp>
 
 namespace hsg {
 
@@ -37,19 +38,40 @@ namespace hsg {
 	background.center = center;
     }
 
-    void GameLayout::loadLevel(const char* fileName){
+/*
+    void boost::shared_array<char> GameLayout::readFile(const char* fileName){
 	std::ifstream ifs(fileName);
 
 	ifs.seekg (0, ifs.end);
 	int length = ifs.tellg();
 	ifs.seekg (0, ifs.beg);
 
-	char str[length];
-	ifs.read(str, length);
+	boost::shared_array<char> text(new char[length + 1]);
+	ifs.read(text.get(), length);
 	ifs.close();
+	text[length] = '\0';
+	
+	return text;
+    }
+*/
+    void GameLayout::loadLevel(const char* fileName){
+	HSG_DEBUG("GameLayout::loadLevel");
+
+	boost::shared_array<char> text;
+
+	{
+	    std::ifstream ifs(fileName);
+	    ifs.seekg (0, ifs.end);
+	    int length = ifs.tellg();
+	    ifs.seekg (0, ifs.beg);
+	    text.reset(new char[length + 1]);
+	    ifs.read(text.get(), length);
+	    ifs.close();
+	    text[length] = '\0';
+	}
 
 	xml_document<> doc;
-	doc.parse<0>(str);
+	doc.parse<0>(text.get());
 
 
 	for(xml_node<> *node = doc.first_node("background"); node; node = node->next_sibling()){
@@ -70,6 +92,8 @@ namespace hsg {
     }
 
     void GameLayout::parseMosaic(xml_node<> *mosaicNode){
+	HSG_DEBUG("GameLayout::parseMosaic");
+
 	int rowCnt = 0;
 	int colCnt = 0;
 	std::vector<std::vector<std::string> > wallStr;
