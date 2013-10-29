@@ -135,8 +135,8 @@ namespace hsg {
 
 		if(strcmp(rowStr[col].c_str(), "hole")){ //not a hole
 		    BrickLayout brick;
-		    brick.width = brickWidth - 1;
-		    brick.height = brickHeight - 1;
+		    brick.width = brickWidth;
+		    brick.height = brickHeight;
 		    brick.center.set(brickX, brickY, 0.0f);
 		    brick.fileName = rowStr[col] + ".png";
 
@@ -147,7 +147,7 @@ namespace hsg {
 
 	    }
 
-	    brickY += brickHeight;
+	    brickY -= brickHeight;
 	}
     }
 }
