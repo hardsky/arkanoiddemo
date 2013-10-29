@@ -30,9 +30,9 @@ namespace hsg {
 	StartLayout m_layout;
 	GraphicsService* m_graphics;
 	CoordSystem* m_coordSystem;
+	Background m_background;
 	GraphicsSprite* m_buttonSprite;
 	
-	boost::scoped_ptr<Background> m_background;
     };
 
 }

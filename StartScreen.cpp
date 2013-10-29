@@ -13,17 +13,17 @@ namespace hsg {
 	m_gameQueue(context->gameQueue),
 	m_layout(context->coordSystem),
 	m_graphics(context->graphicsService),
+	m_coordSystem(context->coordSystem),
+	m_background(context, &m_layout.background),
 	m_buttonSprite(m_graphics->registerSprite(m_graphics->registerTexture(m_layout.button.fileName.c_str()),
 						  m_layout.button.width, m_layout.button.height,
-						  m_layout.button.center)),
-	m_coordSystem(context->coordSystem){
+						  m_layout.button.center)){
 
-	m_background.reset(new Background(context, &m_layout.background));	
-	m_appQueue->subscribe(SYSTEM_MOUSE_CLICK, this);
+	m_gameQueue->subscribe(SYSTEM_MOUSE_CLICK, this);
     }
 
     StartScreen::~StartScreen(){
-	m_appQueue->unsubscribe(SYSTEM_MOUSE_CLICK, this);
+	m_gameQueue->unsubscribe(SYSTEM_MOUSE_CLICK, this);
 	m_graphics->unregisterSprite(m_buttonSprite);
     }
 
@@ -38,10 +38,10 @@ namespace hsg {
     }
     
     void StartScreen::onEvent(const Event::ptr& event){
+	HSG_DEBUG("StartScreen::onEvent");
 	switch(event->getEventType()){
 	case SYSTEM_MOUSE_CLICK:
 	{
-	    HSG_DEBUG("StartScreen::onEvent");
 	    EventClick* clickEvent = (EventClick*)event.get();
 
 	    Vector3 gameCoords = m_coordSystem->toGameCoords(clickEvent->x, clickEvent->y);

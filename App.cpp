@@ -2,6 +2,7 @@
 #include "EventType.h"
 #include "EventClick.h"
 #include "Vector3.h"
+#include "Log.h"
 
 #include <GL/glut.h>
 
@@ -78,6 +79,7 @@ namespace hsg {
     }
 
     void App::click(int button, int state, int x, int y){
+	HSG_DEBUG("App::click");
 	if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
 	    m_gameQueue.postEvent(Event::ptr(new EventClick(x, y)));
 	}

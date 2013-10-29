@@ -10,11 +10,11 @@ namespace hsg {
     ScreenMaster::ScreenMaster(Context* context):
 	m_context(context){
 	
-	m_context->appQueue->subscribe(GAME_START, this);
+	m_context->gameQueue->subscribe(GAME_START, this);
     }
 
     ScreenMaster::~ScreenMaster() {
-	m_context->appQueue->unsubscribe(GAME_START, this);
+	m_context->gameQueue->unsubscribe(GAME_START, this);
     }
 
     void ScreenMaster::update(){
