@@ -1,4 +1,5 @@
 #include "CoordSystem.h"
+#include "Log.h"
 
 #include <algorithm>
 #include <functional>
@@ -44,6 +45,7 @@ namespace hsg {
     }
 
     void CoordSystem::update(int nScreenWidth, int nScreenHeight) {
+	HSG_DEBUG("CoordSystem::update");
 	m_ScreenSz.Height = nScreenHeight;
 	m_ScreenSz.Width = nScreenWidth;
 

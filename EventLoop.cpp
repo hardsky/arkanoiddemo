@@ -1,5 +1,6 @@
 #include "EventLoop.h"
 #include "EventDispatcher.h"
+#include "Log.h"
 
 namespace hsg {
 
@@ -13,6 +14,8 @@ namespace hsg {
     EventLoop::~EventLoop(){}
 
     void EventLoop::operator()(){
+	HSG_DEBUG("EventLoop: started");
+	m_screenMaster.startScreen();
 	while(m_run){
 	    m_gameQueue->processEvents();	    
 	    m_screenMaster.update();

@@ -16,12 +16,13 @@ namespace hsg {
 	
 	void onEvent(const Event::ptr& event);
 	    
+	void startScreen();
+	void gameScreen();
+
     private:
 	Context* m_context;
 	Screen::ptr m_activeScreen;
 
-	void startScreen();
-	void gameScreen();
     };
 
 } /* namespace hsg */

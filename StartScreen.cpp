@@ -2,6 +2,7 @@
 #include "GraphicsService.h"
 #include "EventClick.h"
 #include "EventDispatcher.h"
+#include "Log.h"
 
 namespace hsg {
 
@@ -40,6 +41,7 @@ namespace hsg {
 	switch(event->getEventType()){
 	case SYSTEM_MOUSE_CLICK:
 	{
+	    HSG_DEBUG("StartScreen::onEvent");
 	    EventClick* clickEvent = (EventClick*)event.get();
 
 	    Vector3 gameCoords = m_coordSystem->toGameCoords(clickEvent->x, clickEvent->y);

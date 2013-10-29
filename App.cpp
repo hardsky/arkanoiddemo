@@ -1,9 +1,13 @@
 #include "App.h"
 #include "EventType.h"
 #include "EventClick.h"
+#include "Vector3.h"
+
 #include <GL/glut.h>
 
 namespace hsg {
+
+    using namespace hsg;
 
     App* App::_instance = 0;
 
@@ -31,6 +35,17 @@ namespace hsg {
 
 	m_eventLoop.reset(new EventLoop(&m_context));
 
+	glutDisplayFunc(draw_callback);
+	glutReshapeFunc(resize_callback);
+	glutMouseFunc(mouse_callback);
+	glutIdleFunc(idle_callback);
+
+	m_coordSystem.setCenter(Vector3::zero());
+	m_coordSystem.setEdges(-1.5f, 1.5f, -2.0f, 2.0f);
+
+	preloadtextures();
+	m_graphicsService.start();
+
 	App::_instance = this;
     }
 
@@ -48,14 +63,6 @@ namespace hsg {
     }
 
     void App::run(){
-
-	glutDisplayFunc(draw_callback);
-	glutReshapeFunc(resize_callback);
-	glutMouseFunc(mouse_callback);
-	glutIdleFunc(idle_callback);
-
-	preloadtextures();
-
 	m_gameThread = boost::thread(boost::ref(*m_eventLoop));
 	glutMainLoop();
 	m_gameQueue.postEvent(Event::ptr(new Event(SYSTEM_EXIT)));
