@@ -1,5 +1,6 @@
 #include "StartLayout.h"
 #include "CoordSystem.h"
+#include "Log.h"
 
 namespace hsg {
     StartLayout::StartLayout(CoordSystem* coordSystem){
@@ -14,9 +15,9 @@ namespace hsg {
 	button.fileName = "start_button.png";
 
 	background.width = width;
-	background.height = height;
+	background.height = height;	
 	background.center = center;
-	background.fileName = "start_screen.png";
+	background.fileName = "start_screen.png";	
     }
 
 }

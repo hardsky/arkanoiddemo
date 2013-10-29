@@ -94,7 +94,7 @@ namespace hsg {
 
     void GraphicsService::onCoordsUpdate(CoordSystem* pCoords){
 	Rect viewPort = pCoords->getViewPort();
-	glViewport (0, 0, (GLsizei) viewPort.height, (GLsizei) viewPort.width);
+	glViewport (0, 0, (GLsizei) viewPort.width, (GLsizei) viewPort.height);
 
 	Log::info("Viewport : %d x %d", viewPort.width, viewPort.height);
 	glMatrixMode(GL_PROJECTION);

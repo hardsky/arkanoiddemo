@@ -22,7 +22,7 @@ namespace hsg {
 
     }
     GraphicsSprite::GraphicsSprite(GraphicsTexture* pTexture,
-				   float Height, float Width, Vector3 Location) :
+				   float Width, float Height, Vector3 Location) :
         m_Texture(pTexture), m_Location(Location),
         m_Height(Height), m_Width(Width),m_isActive(true)
     {}
