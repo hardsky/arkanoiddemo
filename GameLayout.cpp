@@ -57,7 +57,7 @@ namespace hsg {
     }
 */
     void GameLayout::loadLevel(const char* fileName){
-	HSG_DEBUG("GameLayout::loadLevel");
+	HSG_DEBUG("GameLayout::loadLevel: %s", fileName);
 
 	boost::shared_array<char> text;
 
@@ -70,15 +70,21 @@ namespace hsg {
 	    ifs.read(text.get(), length);
 	    ifs.close();
 	    text[length] = '\0';
+	    
+	    HSG_DEBUG("file length: %d",length);
+	    HSG_DEBUG("%s",text.get());
 	}
 
 	xml_document<> doc;
 	doc.parse<0>(text.get());
 
+	xml_node<> *nodeLevel = doc.first_node("level");
 
-	for(xml_node<> *node = doc.first_node("background"); node; node = node->next_sibling()){
+	for(xml_node<> *node = nodeLevel->first_node("background"); node; node = node->next_sibling()){
+	    HSG_DEBUG(node->name());
 	    xml_attribute<> *attr = node->first_attribute();
 	    if(!strcmp(node->name(), "background")){
+		HSG_DEBUG(attr->value());
 		background.fileName = attr->value();
 	    }
 	    else if(!strcmp(node->name(), "ball")){

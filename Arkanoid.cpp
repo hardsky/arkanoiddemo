@@ -27,7 +27,8 @@ namespace hsg {
 	// TODO Auto-generated destructor stub
     }
     void Arkanoid::update() {
-	HSG_DEBUG("Arkanoid: update");
+	//HSG_DEBUG("Arkanoid: update");
+	//return;
         m_timeService->update();
 
 
