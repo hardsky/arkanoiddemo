@@ -40,6 +40,8 @@ namespace hsg {
 	glutReshapeFunc(resize_callback);
 	glutMouseFunc(mouse_callback);
 	glutIdleFunc(idle_callback);
+	glutSpecialFunc(special_key_press_callback);
+	glutSpecialUpFunc(special_key_up_callback);
 
 	m_coordSystem.setCenter(Vector3::zero());
 	m_coordSystem.setEdges(-1.5f, 1.5f, -2.0f, 2.0f);

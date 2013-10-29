@@ -26,7 +26,7 @@ namespace hsg {
 	PhysicsObject::ptr m_physics;
 	GraphicsSprite* m_sprite;
 	BatLayout m_layout;
-	EventDispatcher* m_appQueue;
+	EventDispatcher* m_gameQueue;
 	b2PolygonShape m_shapeDef;
     };
 

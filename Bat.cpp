@@ -2,13 +2,14 @@
 #include "PhysicsService.h"
 #include "GraphicsService.h"
 #include "EventDispatcher.h"
+#include "Log.h"
 
 namespace hsg {
 
     Bat::Bat(Context* context, BatLayout* layout):
 	VELOCITY_X(1),
 	m_graphicsService(context->graphicsService),
-	m_appQueue(context->appQueue){
+	m_gameQueue(context->gameQueue){
 
 
 	m_sprite=m_graphicsService->registerSprite(
@@ -20,10 +21,10 @@ namespace hsg {
         m_physics = context->physicsService->registerEntity(&m_shapeDef,
 	    0X1, 0x2, 0.0f);
 	
-	m_appQueue->subscribe(SYSTEM_KEY_LEFT_DOWN, this);
-	m_appQueue->subscribe(SYSTEM_KEY_RIGHT_DOWN, this);
-	m_appQueue->subscribe(SYSTEM_KEY_LEFT_UP, this);
-	m_appQueue->subscribe(SYSTEM_KEY_RIGHT_UP, this);
+	m_gameQueue->subscribe(SYSTEM_KEY_LEFT_DOWN, this);
+	m_gameQueue->subscribe(SYSTEM_KEY_RIGHT_DOWN, this);
+	m_gameQueue->subscribe(SYSTEM_KEY_LEFT_UP, this);
+	m_gameQueue->subscribe(SYSTEM_KEY_RIGHT_UP, this);
     }
 
     void Bat::spawn(){
@@ -36,6 +37,7 @@ namespace hsg {
     }
 
     void Bat::onEvent(const Event::ptr& event){
+	//HSG_DEBUG("Bat::onEvent");
 	switch(event->getEventType()){
 	case SYSTEM_KEY_LEFT_DOWN:
 	{
@@ -63,10 +65,10 @@ namespace hsg {
     Bat::~Bat() {
 	m_graphicsService->unregisterSprite(m_sprite);
 
-	m_appQueue->unsubscribe(SYSTEM_KEY_LEFT_DOWN, this);
-	m_appQueue->unsubscribe(SYSTEM_KEY_RIGHT_DOWN, this);
-	m_appQueue->unsubscribe(SYSTEM_KEY_LEFT_UP, this);
-	m_appQueue->unsubscribe(SYSTEM_KEY_RIGHT_UP, this);
+	m_gameQueue->unsubscribe(SYSTEM_KEY_LEFT_DOWN, this);
+	m_gameQueue->unsubscribe(SYSTEM_KEY_RIGHT_DOWN, this);
+	m_gameQueue->unsubscribe(SYSTEM_KEY_LEFT_UP, this);
+	m_gameQueue->unsubscribe(SYSTEM_KEY_RIGHT_UP, this);
     }
 
 } /* namespace hsg */

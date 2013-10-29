@@ -121,7 +121,7 @@ namespace hsg {
 	float brickWidth = wall.width / colCnt;
 	float brickHeight = wall.height / rowCnt;
 	
-	float centerX = wall.center.x;
+	float centerX = 0.0f;
 	float topEdge = wall.center.y + wall.height / 2;
 	
 	float brickY = topEdge - brickHeight / 2;
