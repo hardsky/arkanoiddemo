@@ -138,7 +138,7 @@ namespace hsg {
 		    brick.width = brickWidth - 1;
 		    brick.height = brickHeight - 1;
 		    brick.center.set(brickX, brickY, 0.0f);
-		    brick.fileName = rowStr[col];
+		    brick.fileName = rowStr[col] + ".png";
 
 		    wall.bricks.push_back(brick);
 		}		
