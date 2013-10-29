@@ -15,11 +15,7 @@ public:
     typedef vec::iterator vec_it;
 
 public:
-    PhysicsObject(uint16 pCategory, uint16 pMask,
-        int32_t pDiameter, float pRestitution, b2World* pWorld);
-
-    PhysicsObject(uint16 pCategory, uint16 pMask,
-		  int32_t width, int32_t height, float pRestitution, b2World* pWorld);
+    PhysicsObject(b2Shape* shapeDef, uint16 pCategory, uint16 pMask, float pRestitution, b2World* pWorld);
 
     void initialize(float pX, float pY,
         float pVelocityX, float pVelocityY);
@@ -33,7 +29,6 @@ private:
     b2World* m_world;
     b2BodyDef m_bodyDef;
     b2Body* m_bodyObj;
-    b2Shape* m_shapeDef;
     b2FixtureDef m_fixtureDef;
 };
 

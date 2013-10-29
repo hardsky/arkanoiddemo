@@ -10,7 +10,7 @@ add_subdirectory (Box2D)
 include_directories ("${PROJECT_SOURCE_DIR}/freeglut")
 add_subdirectory (freeglut)
 
-set (EXTRA_LIBS ${EXTRA_LIBS} Box2D freeglut)
+set (EXTRA_LIBS ${EXTRA_LIBS} Box2D)
 
 set(arkanoiddemo_SRCS
 App.cpp
@@ -20,8 +20,8 @@ Ball.cpp
 Bat.cpp
 Brick.cpp
 CoordSystem.cpp
+Edges.cpp
 EventClick.cpp
-Event.cpp
 EventDispatcher.cpp
 EventLoop.cpp
 GameLayout.cpp
@@ -53,6 +53,7 @@ Brick.h
 Context.h
 CommonLayout.h
 CoordSystem.h
+Edges.h
 EventClick.h
 EventDispatcher.h
 Event.h

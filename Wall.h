@@ -1,6 +1,7 @@
 #ifndef HSG_WALL_H_
 #define HSG_WALL_H_
 
+#include "Context.h"
 #include "GameLayout.h"
 #include "Brick.h"
 
@@ -15,6 +16,7 @@ namespace hsg {
 	void update();
 
     private:
+	Context* m_context;
 	GraphicsService* m_graphicsService;
 	PhysicsObject* m_physics;
 	GraphicsSprite* m_sprite;

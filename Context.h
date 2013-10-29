@@ -9,7 +9,7 @@ namespace hsg{
     class EventDispatcher;
 
     struct Context{
-	CoordSystem* coordService;
+	CoordSystem* coordSystem;
 	GraphicsService* graphicsService;
 	TimeService* timeService;
 	PhysicsService* physicsService;

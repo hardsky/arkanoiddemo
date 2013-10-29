@@ -1,5 +1,6 @@
-#include "PhysicsService.hpp"
-#include "Log.hpp"
+#include "PhysicsService.h"
+#include "TimeService.h"
+#include "Log.h"
 
 namespace hsg {
 
@@ -9,29 +10,18 @@ namespace hsg {
         mWorld.SetContactListener(this);
     }
 
-    PhysicsObject::ptr PhysicsService::registerEntity(
-        uint16 pCategory, uint16 pMask, int32_t pDiameter,
-        float pRestitution) {
-        PhysicsObject::ptr lCollider(new PhysicsObject(pCategory,
-						       pMask, pDiameter, pRestitution, &mWorld));
+    PhysicsObject::ptr PhysicsService::registerEntity(b2Shape* shapeDef, uint16 pCategory, uint16 pMask, float pRestitution) {
+
+        PhysicsObject::ptr lCollider(new PhysicsObject(shapeDef, pCategory, pMask, pRestitution, &mWorld));
         mColliders.push_back(lCollider);
         return mColliders.back();
     }
-
-    PhysicsObject::ptr PhysicsService::registerEntity(uint16 pCategory,
-						      uint16 pMask, int32_t width, int32_t height, float pRestitution){
-        PhysicsObject::ptr lCollider(new PhysicsObject(pCategory,
-						       pMask, width, height, pRestitution, &mWorld));
-        mColliders.push_back(lCollider);
-        return mColliders.back();
-    }
-
 
     status PhysicsService::update() {
         // Clears collision flags.
         PhysicsObject::vec_it iCollider = mColliders.begin();
         for (; iCollider < mColliders.end() ; ++iCollider) {
-            (*iCollider)->mCollide = false;
+            (*iCollider)->m_collide = false;
         }
 
         // Updates simulation.
@@ -49,11 +39,11 @@ namespace hsg {
     void PhysicsService::BeginContact(b2Contact* pContact) {
         void* lUserDataA = pContact->GetFixtureA()->GetUserData();
         if (lUserDataA != NULL) {
-            ((PhysicsObject*)(lUserDataA))->mCollide = true;
+            ((PhysicsObject*)(lUserDataA))->m_collide = true;
         }
         void* lUserDataB = pContact->GetFixtureB()->GetUserData();
         if (lUserDataB != NULL) {
-            ((PhysicsObject*)(lUserDataB))->mCollide = true;
+            ((PhysicsObject*)(lUserDataB))->m_collide = true;
         }
     }
 }

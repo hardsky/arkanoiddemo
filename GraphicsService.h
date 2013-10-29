@@ -5,6 +5,7 @@
 #include "GraphicsTexture.h"
 #include "ICoordListener.h"
 #include "IEventListener.h"
+#include "Types.h"
 
 namespace hsg {
 
@@ -13,9 +14,9 @@ namespace hsg {
     	GraphicsService();
         ~GraphicsService();
 
-        void start();
+        status start();
         void stop();
-        void update();
+        status update();
 
 	void onEvent(const Event::ptr& event);//SYSTEM_VIDEO_INIT is occured
 
@@ -29,8 +30,8 @@ namespace hsg {
 
     protected:
 
-        void loadResources();
-        void unloadResources();
+        status loadResources();
+        status unloadResources();
         void setup();
         void setupMatrix(int width, int height, bool scale=false);
 

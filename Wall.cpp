@@ -10,6 +10,7 @@ namespace hsg {
     using namespace boost::adaptors;
 
     Wall::Wall(Context* context, WallLayout* layout):
+	m_context(context),
 	m_graphicsService(context->graphicsService){
 
 	push_back(m_bricks, layout->bricks | transformed(bind(&Wall::createBreak, this, _1)));

@@ -20,7 +20,7 @@ namespace hsg {
 	glutInitWindowPosition(100, 100);
 	glutCreateWindow(argv[0]);
 	
-	m_context.coordService = &m_coordSystem;
+	m_context.coordSystem = &m_coordSystem;
 	m_context.graphicsService = &m_graphicsService;
 	m_context.appQueue = &m_appQueue;
 	m_context.gameQueue = &m_gameQueue;

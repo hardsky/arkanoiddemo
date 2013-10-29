@@ -2,9 +2,13 @@
 #include "IEventListener.h"
 
 #include <boost/thread/locks.hpp>
+#include <boost/range/algorithm/for_each.hpp>
+#include <boost/bind.hpp>
 #include <algorithm>
 
 namespace hsg {
+
+    using namespace boost;
 
     EventDispatcher::EventDispatcher():
 	m_pendingQueue(&m_firstQueue),
@@ -23,7 +27,7 @@ namespace hsg {
 
     void EventDispatcher::processEvents() {
 	swapQueues();
-	for_each(*m_workingQueue, bind(&EventDispatcher::processEvent));
+	for_each(*m_workingQueue, bind(&EventDispatcher::processEvent, this, _1));
 	m_workingQueue->clear();
     }
 
@@ -53,16 +57,16 @@ namespace hsg {
 	std::map<EventType, std::vector<IEventListener*> >::iterator finded;
 	finded = m_listeners.find(enType);
 	if(finded != m_listeners.end()){
-	    std::vector<IEventListener*>& vec = finded.second;
+	    std::vector<IEventListener*>& vec = finded->second;
 	    vec.erase(std::remove(vec.begin(), vec.end(), listener), vec.end());
 	}
     }			
 
     void EventDispatcher::processEvent(const Event::ptr& event){
 	std::map<EventType, std::vector<IEventListener*> >::iterator finded;
-	finded = m_listeners.find(enType);
+	finded = m_listeners.find(event->getEventType());
 	if(finded != m_listeners.end()){
-	    for_each(finded->second, bind(&IEventListener::onEvent(_1, event)));
+	    for_each(finded->second, bind(&IEventListener::onEvent, _1, event));
 	}	
     }
 

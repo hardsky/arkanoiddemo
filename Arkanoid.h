@@ -6,6 +6,7 @@
 #include "Bat.h"
 #include "Ball.h"
 #include "Wall.h"
+#include "Edges.h"
 #include "Screen.h"
 
 #include <boost/scoped_ptr.hpp>
@@ -34,6 +35,7 @@ namespace hsg {
 	boost::scoped_ptr<Bat> m_bat;
 	boost::scoped_ptr<Ball> m_ball;
 	boost::scoped_ptr<Wall> m_wall;
+	boost::scoped_ptr<Edges> m_edges;
     };
 
 } /* namespace hsg */

@@ -1,10 +1,11 @@
 #include "StartLayout.h"
+#include "CoordSystem.h"
 
 namespace hsg {
     StartLayout::StartLayout(CoordSystem* coordSystem){
-    	width = coorSystem->right() - coorSystem->left();
-	height = coorSystem->top() - coorSystem->bottom();
-	center = coorSystem->center();
+    	width = coordSystem->right() - coordSystem->left();
+	height = coordSystem->top() - coordSystem->bottom();
+	center = coordSystem->center();
 
 	button.width = width * 0.3;
 	button.height = height * 0.1;

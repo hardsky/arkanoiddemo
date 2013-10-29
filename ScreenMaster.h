@@ -13,15 +13,15 @@ namespace hsg {
 	~ScreenMaster();
 	
 	void update();
-
-	void startScreen();
-	void gameScreen();
 	
 	void onEvent(const Event::ptr& event);
 	    
     private:
 	Context* m_context;
 	Screen::ptr m_activeScreen;
+
+	void startScreen();
+	void gameScreen();
     };
 
 } /* namespace hsg */

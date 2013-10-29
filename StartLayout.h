@@ -1,7 +1,13 @@
 #ifndef HSG_STARTLAYOUT_H
 #define HSG_STARTLAYOUT_H
 
-namescape hsg {
+#include "Context.h"
+#include "Vector3.h"
+#include "CommonLayout.h"
+
+#include <string>
+
+namespace hsg {
 
     struct ButtonLayout {
 	float width;

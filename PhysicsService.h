@@ -12,11 +12,7 @@ namespace hsg {
     class PhysicsService: private b2ContactListener {
     public:
 	PhysicsService(TimeService* pTimeService);
-
-	PhysicsObject::ptr registerEntity(uint16 pCategory,
-					  uint16 pMask, int32_t pDiameter, float pRestitution);
-	PhysicsObject::ptr registerEntity(uint16 pCategory,
-					  uint16 pMask, int32_t width, int32_t height, float pRestitution);
+	PhysicsObject::ptr registerEntity(b2Shape* shapeDef, uint16 pCategory, uint16 pMask, float pRestitution);
 	status update();
 
     private:

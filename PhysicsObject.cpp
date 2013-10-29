@@ -3,57 +3,43 @@
 
 namespace hsg {
 
-    PhysicsObject::PhysicsObject(uint16 pCategory, uint16 pMask,
-      int32_t pDiameter, float pRestitution, b2World* pWorld) :
-      mLocation(), mCollide(false), mWorld(pWorld),
-      mBodyDef(), mBodyObj(NULL), mShapeDef(), mFixtureDef() {
-        mBodyDef.type = b2_dynamicBody;
-        mBodyDef.userData = this;
-        mBodyDef.awake = true;
-        mBodyDef.fixedRotation = true;
+    PhysicsObject::PhysicsObject(b2Shape* shapeDef, uint16 pCategory, uint16 pMask, float pRestitution, b2World* pWorld):
+      m_location(), m_collide(false), m_world(pWorld),
+      m_bodyDef(), m_bodyObj(NULL), m_fixtureDef() {
 
-        // Box2D requires half dimension (from center to borders).
-        mShapeDef.m_p = b2Vec2_zero;
-        mShapeDef.m_radius = pDiameter / (2.0f * SCALE_FACTOR);
+        m_bodyDef.type = b2_dynamicBody;
+        m_bodyDef.userData = this;
+        m_bodyDef.awake = true;
+        m_bodyDef.fixedRotation = true;
 
-        mFixtureDef.shape = &mShapeDef;
-        mFixtureDef.density = 1.0f;
-        mFixtureDef.friction = 0.0f;
-        mFixtureDef.restitution = pRestitution;
-        mFixtureDef.filter.categoryBits = pCategory;
-        mFixtureDef.filter.maskBits = pMask;
-        mFixtureDef.userData = this;
+        m_fixtureDef.shape = shapeDef;
+        m_fixtureDef.density = 1.0f;
+        m_fixtureDef.friction = 0.0f;
+        m_fixtureDef.restitution = pRestitution;
+        m_fixtureDef.filter.categoryBits = pCategory;
+        m_fixtureDef.filter.maskBits = pMask;
+        m_fixtureDef.userData = this;
 
-        mBodyObj = mWorld->CreateBody(&mBodyDef);
-        mBodyObj->CreateFixture(&mFixtureDef);
-        mBodyObj->SetUserData(this);
-    }
-
-    PhysicsObject::PhysicsObject(uint16 pCategory, uint16 pMask,
-		  int32_t width, int32_t height, float pRestitution, b2World* pWorld){
-    }
-
-    PhysicsTarget::ptr PhysicsObject::createTarget(float pFactor) {
-        return PhysicsTarget::ptr(
-            new PhysicsTarget(mWorld, mBodyObj, mLocation, pFactor));
+        m_bodyObj = m_world->CreateBody(&m_bodyDef);
+        m_bodyObj->CreateFixture(&m_fixtureDef);
+        m_bodyObj->SetUserData(this);
     }
 
     void PhysicsObject::initialize(float pX, float pY,
         float pVelocityX, float pVelocityY) {
-        mLocation.setPosition(pX, pY);
-        b2Vec2 lPosition(pX / SCALE_FACTOR, pY / SCALE_FACTOR);
-        mBodyObj->SetTransform(lPosition, 0.0f);
-        mBodyObj->SetLinearVelocity(b2Vec2(pVelocityX, pVelocityY));
+        m_location.set(pX, pY, 0);
+        b2Vec2 lPosition(pX, pY);
+        m_bodyObj->SetTransform(lPosition, 0.0f);
+        m_bodyObj->SetLinearVelocity(b2Vec2(pVelocityX, pVelocityY));
     }
 
     void PhysicsObject::setVelocity(float velocityX, float velocityY){
-        mBodyObj->SetLinearVelocity(b2Vec2(velocityX, velocityY));
+        m_bodyObj->SetLinearVelocity(b2Vec2(velocityX, velocityY));
     }
 
     void PhysicsObject::update() {
-        mLocation.setPosition(
-            mBodyObj->GetPosition().x * SCALE_FACTOR,
-            mBodyObj->GetPosition().y * SCALE_FACTOR);
+        m_location.set(m_bodyObj->GetPosition().x,
+            m_bodyObj->GetPosition().y, 0);
     }
 
 } /* namespace hsg */

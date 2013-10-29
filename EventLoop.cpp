@@ -17,9 +17,9 @@ namespace hsg {
 	}
     }
 
-    void onEvent(const Event::ptr& event){
-	switch(event->getType()){
-	case EventType::SYSTEM_EXIT:
+    void EventLoop::onEvent(const Event::ptr& event){
+	switch(event->getEventType()){
+	case SYSTEM_EXIT:
 	    m_run = false;
 	    break;
 	}

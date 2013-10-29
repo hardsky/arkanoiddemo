@@ -8,20 +8,21 @@
 
 namespace hsg {
 
-class Ball {
-public:
+    class Ball {
+    public:
 	Ball(Context* context, BallLayout* layout);
 	~Ball();
 	
 	void spawn();
 	void update();
 
-private:
+    private:
 	GraphicsService* m_graphics;
 	PhysicsObject::ptr m_physics;
 	GraphicsSprite* m_sprite;
 	BallLayout m_layout;
-};
+	b2CircleShape m_shapeDef;
+    };
 
 } /* namespace hsg */
 #endif /* HSG_BALL_H_ */

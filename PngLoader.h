@@ -1,7 +1,7 @@
 #ifndef HSG_PNGLOADER_H_
 #define HSG_PNGLOADER_H_
 
-#include "Interfaces/IImageLoader.h"
+#include "IImageLoader.h"
 
 #include <libpng/png.h>
 #include <GL/gl.h>

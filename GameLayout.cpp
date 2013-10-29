@@ -1,5 +1,7 @@
 #include "GameLayout.h"
 #include <fstream>
+#include <sstream>
+#include <string>
 #include <string.h>
 
 namespace hsg {
@@ -7,27 +9,27 @@ namespace hsg {
     using namespace rapidxml;
 
     GameLayout::GameLayout(CoordSystem* coordSystem){
-	width = coorSystem->right() - coorSystem->left();
-	height = coorSystem->top() - coorSystem->bottom();
-	center = coorSystem->center();
+	width = coordSystem->right() - coordSystem->left();
+	height = coordSystem->top() - coordSystem->bottom();
+	center = coordSystem->center();
 			
 	wall.width = width * 0.8;
-	wall.heiht = height * 0.5;
+	wall.height = height * 0.5;
 			
 	ball.diameter = width * 0.05;
 			
 	bat.width  = width * 0.25;
 	bat.height = height * 0.025;
 
-	bat.center.set(coorSystem->center().x,
-		       coorSystem->bottom() + bat.height / 2,
+	bat.center.set(coordSystem->center().x,
+		       coordSystem->bottom() + bat.height / 2,
 		       0);
 
 	ball.center = bat.center;
 	ball.center.y += bat.height / 2 + ball.diameter / 2;
 			
-	wall.center.set(coorSystem->center().x,
-			coorSystem->top() - height * 0.1 -  wall.heiht / 2,
+	wall.center.set(coordSystem->center().x,
+			coordSystem->top() - height * 0.1 -  wall.height / 2,
 			0);
 
 	background.width = width;
@@ -36,16 +38,23 @@ namespace hsg {
     }
 
     void GameLayout::loadLevel(const char* fileName){
-	std::stringbuf sb;
-	std::ifstream fs(fileName);
-	fs >> sb;
+	std::ifstream ifs(fileName);
+
+	ifs.seekg (0, ifs.end);
+	int length = ifs.tellg();
+	ifs.seekg (0, ifs.beg);
+
+	char str[length];
+	ifs.read(str, length);
+	ifs.close();
+
 	xml_document<> doc;
-	doc.parse<0>(sb);
+	doc.parse<0>(str);
 
 
 	for(xml_node<> *node = doc.first_node("background"); node; node = node->next_sibling()){
+	    xml_attribute<> *attr = node->first_attribute();
 	    if(!strcmp(node->name(), "background")){
-		xml_attribute<> *attr = node->first_attribute();
 		background.fileName = attr->value();
 	    }
 	    else if(!strcmp(node->name(), "ball")){
@@ -55,7 +64,7 @@ namespace hsg {
 		bat.fileName = attr->value();
 	    }
 	    else if(!strcmp(node->name(), "mosaic")){
-		parseMosaic(xml_node<> *mosaicNode);
+		parseMosaic(node);
 	    }
 	}
     }
@@ -92,7 +101,7 @@ namespace hsg {
 
 	    for(int col = 0; col < rowStr.size(); ++col){
 
-		if(strcmp(rowStr[col], "hole")){ //not a hole
+		if(strcmp(rowStr[col].c_str(), "hole")){ //not a hole
 		    BrickLayout brick;
 		    brick.width = brickWidth - 1;
 		    brick.height = brickHeight - 1;

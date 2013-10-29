@@ -5,10 +5,13 @@
 #include "Screen.h"
 #include "StartLayout.h"
 #include "IEventListener.h"
+#include "Background.h"
 
 #include <boost/scoped_ptr.hpp>
 
-namescape hsg {
+namespace hsg {
+
+    class GraphicsSprite;
 
     class StartScreen: public Screen, public IEventListener {
     public:
@@ -27,7 +30,7 @@ namescape hsg {
 	StartLayout m_layout;
 	GraphicsService* m_graphics;
 	CoordSystem* m_coordSystem;
-	GraphicsSprite* m_buttonSprite
+	GraphicsSprite* m_buttonSprite;
 	
 	boost::scoped_ptr<Background> m_background;
     };

@@ -5,6 +5,7 @@
 #include <boost/thread/recursive_mutex.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <map>
+#include <vector>
 
 namespace hsg {
 
@@ -29,7 +30,7 @@ namespace hsg {
 
 	boost::recursive_mutex m_rmx;
 	
-	std::map<EventType, IEventListener*> m_listeners;
+	std::map<EventType, std::vector<IEventListener*> > m_listeners;
 
 	void swapQueues();
 	void processEvent(const Event::ptr& event);

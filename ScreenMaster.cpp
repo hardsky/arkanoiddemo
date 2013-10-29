@@ -1,6 +1,7 @@
 #include "ScreenMaster.h"
 #include "StartScreen.h"
 #include "Arkanoid.h"
+#include "EventDispatcher.h"
 
 namespace hsg {
 
@@ -9,11 +10,11 @@ namespace hsg {
     ScreenMaster::ScreenMaster(Context* context):
 	m_context(context){
 	
-	m_context->subscribe(EventType::GAME_START, this);
+	m_context->appQueue->subscribe(GAME_START, this);
     }
 
     ScreenMaster::~ScreenMaster() {
-	m_context->unsubscribe(EventType::GAME_START, this);
+	m_context->appQueue->unsubscribe(GAME_START, this);
     }
 
     void ScreenMaster::update(){
@@ -42,9 +43,9 @@ namespace hsg {
 	m_activeScreen->activate();
     }
     
-    void onEvent(const Event::ptr& event){
-	switch(event->getType){
-	case EventType::GAME_START:
+    void ScreenMaster::onEvent(const Event::ptr& event){
+	switch(event->getEventType()){
+	case GAME_START:
 	    gameScreen();
 	    break;
 	}

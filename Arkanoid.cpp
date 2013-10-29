@@ -16,6 +16,7 @@ namespace hsg {
 	m_ball.reset(new Ball(context, &layout->ball));
 	m_bat.reset(new Bat(context, &layout->bat));
 	m_wall.reset(new Wall(context, &layout->wall));
+	m_edges.reset(new Edges(context));
     }
 
     Arkanoid::~Arkanoid() {
@@ -28,6 +29,7 @@ namespace hsg {
 	m_ball->update();
 	m_bat->update();
 	m_wall->update();
+	m_edges->update();
 
 	m_appQueue->postEvent(Event::ptr(new Event(SYSTEM_VIDEO_UPDATE)));
 	m_physicsService->update();
@@ -40,6 +42,7 @@ namespace hsg {
 	m_ball->spawn();
 	m_bat->spawn();
 	m_wall->spawn();
+	m_edges->spawn();
     }
 
     void Arkanoid::deactivate() {

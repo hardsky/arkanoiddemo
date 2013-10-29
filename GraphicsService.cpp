@@ -161,7 +161,7 @@ namespace hsg {
     }
 
     GraphicsSprite* GraphicsService::registerSprite(GraphicsTexture* pImage,
-						    float pHeight, float pWidth, const Vector3& pLocation, int nLayer=0){
+						    float pHeight, float pWidth, const Vector3& pLocation, int nLayer){
 	GraphicsSprite::ptr lSprite(new GraphicsSprite(pImage, pHeight, pWidth, pLocation));
 	m_Sprites.insert(GraphicsSprite::mm_pair(nLayer, lSprite));
 
@@ -175,8 +175,8 @@ namespace hsg {
     }
 
     void GraphicsService::onEvent(const Event::ptr& event){
-	switch(event->getType()){
-	case EventType::SYSTEM_VIDEO_INIT:
+	switch(event->getEventType()){
+	case SYSTEM_VIDEO_INIT:
 	    start();
 	    break;
 	}

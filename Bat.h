@@ -27,6 +27,7 @@ namespace hsg {
 	GraphicsSprite* m_sprite;
 	BatLayout m_layout;
 	EventDispatcher* m_appQueue;
+	b2PolygonShape m_shapeDef;
     };
 
 } /* namespace hsg */
