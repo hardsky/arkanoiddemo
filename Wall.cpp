@@ -23,7 +23,7 @@ namespace hsg {
 
     void Wall::update(){
 	for_each(m_bricks, bind(&Brick::update, _1));
-	m_bricks.erase(std::remove_if(m_bricks.begin(), m_bricks.end(), bind(&Brick::collided, _1)));
+	m_bricks.erase(std::remove_if(m_bricks.begin(), m_bricks.end(), bind(&Brick::collided, _1)), m_bricks.end());
     }
 
     Brick::ptr Wall::createBreak(BrickLayout& brickLayout){

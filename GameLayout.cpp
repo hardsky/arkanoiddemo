@@ -1,4 +1,6 @@
 #include "GameLayout.h"
+#include "Log.h"
+
 #include <fstream>
 #include <sstream>
 #include <string>

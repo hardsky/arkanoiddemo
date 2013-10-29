@@ -3,6 +3,7 @@
 #include "TimeService.h"
 #include "PhysicsService.h"
 #include "EventDispatcher.h"
+#include "Log.h"
 
 namespace hsg {
 
@@ -12,17 +13,21 @@ namespace hsg {
 	m_appQueue(context->appQueue),
 	m_gameQueue(context->gameQueue){
 
+	HSG_DEBUG("Arkanoid: create");
+
 	m_background.reset(new Background(context, &layout->background));
 	m_ball.reset(new Ball(context, &layout->ball));
 	m_bat.reset(new Bat(context, &layout->bat));
 	m_wall.reset(new Wall(context, &layout->wall));
 	m_edges.reset(new Edges(context));
+	
     }
 
     Arkanoid::~Arkanoid() {
 	// TODO Auto-generated destructor stub
     }
     void Arkanoid::update() {
+	HSG_DEBUG("Arkanoid: update");
         m_timeService->update();
 
 
@@ -36,13 +41,15 @@ namespace hsg {
     }
 
     void Arkanoid::activate() {	
-	//m_physicsService->start();
-	//m_timeService->start();
+	HSG_DEBUG("Arkanoid: activate");
 
 	m_ball->spawn();
 	m_bat->spawn();
 	m_wall->spawn();
 	m_edges->spawn();
+
+	m_appQueue->postEvent(Event::ptr(new Event(SYSTEM_VIDEO_UPDATE)));
+
     }
 
     void Arkanoid::deactivate() {

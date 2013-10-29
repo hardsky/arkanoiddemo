@@ -2,6 +2,7 @@
 #include "StartScreen.h"
 #include "Arkanoid.h"
 #include "EventDispatcher.h"
+#include "Log.h"
 
 namespace hsg {
 
@@ -24,6 +25,8 @@ namespace hsg {
     }
 
     void ScreenMaster::startScreen(){
+	HSG_DEBUG("ScreenMaster::startScreen");
+
 	if(m_activeScreen){
 	    m_activeScreen->deactivate();
 	}
@@ -33,6 +36,8 @@ namespace hsg {
     }
 
     void ScreenMaster::gameScreen(){
+	HSG_DEBUG("ScreenMaster::gameScreen");
+
 	if(m_activeScreen){
 	    m_activeScreen->deactivate();
 	}
