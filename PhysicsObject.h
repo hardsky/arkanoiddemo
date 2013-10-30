@@ -15,12 +15,18 @@ public:
     typedef vec::iterator vec_it;
 
 public:
-    PhysicsObject(b2Shape* shapeDef, uint16 pCategory, uint16 pMask, float pRestitution, b2World* pWorld);
+    PhysicsObject(b2Shape* shapeDef, b2BodyType bodyType, uint16 pCategory, uint16 pMask, float pRestitution, b2World* pWorld);
+    PhysicsObject(b2Shape* shapeDef, b2BodyType bodyType, b2World* pWorld);
+    PhysicsObject(b2Shape* shapeDef, b2BodyType bodyType, float pRestitution, b2World* pWorld, float bodyDensity);
+
+    ~PhysicsObject();
 
     void initialize(float pX, float pY,
         float pVelocityX, float pVelocityY);
     void update();
     void setVelocity(float velocityX, float velocityY);
+    void applyImpulse(float x, float y);
+    b2Body* getBodyObject(){return m_bodyObj;};
 
     bool m_collide;
     gameplay::Vector3 m_location;

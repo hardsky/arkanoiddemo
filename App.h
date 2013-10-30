@@ -37,6 +37,8 @@ namespace hsg {
 	void update();
 	void specialKeyPress(int key, int x, int y);
 	void specialKeyUp(int key, int x, int y);
+	void keyPress(unsigned char key, int x, int y);
+
 	void preloadtextures();
 
 	void onEvent(const Event::ptr& event);
@@ -48,6 +50,7 @@ namespace hsg {
 	static void idle_callback();
 	static void special_key_press_callback(int key, int x, int y);
 	static void special_key_up_callback(int key, int x, int y);
+	static void key_press_callback(unsigned char key, int x, int y);
     };
 
 } /* namespace hsg */

@@ -10,11 +10,33 @@ namespace hsg {
         mWorld.SetContactListener(this);
     }
 
-    PhysicsObject::ptr PhysicsService::registerEntity(b2Shape* shapeDef, uint16 pCategory, uint16 pMask, float pRestitution) {
+    PhysicsObject::ptr PhysicsService::registerEntity(b2Shape* shapeDef, b2BodyType bodyType, uint16 pCategory, uint16 pMask, float pRestitution) {
 
-        PhysicsObject::ptr lCollider(new PhysicsObject(shapeDef, pCategory, pMask, pRestitution, &mWorld));
+        PhysicsObject::ptr lCollider(new PhysicsObject(shapeDef, bodyType, pCategory, pMask, pRestitution, &mWorld));
         mColliders.push_back(lCollider);
         return mColliders.back();
+    }
+    PhysicsObject::ptr PhysicsService::registerStaticEntity(b2Shape* shapeDef) {
+
+        PhysicsObject::ptr lCollider(new PhysicsObject(shapeDef, b2_staticBody, &mWorld));
+        mColliders.push_back(lCollider);
+        return mColliders.back();
+    }
+    PhysicsObject::ptr PhysicsService::registerKinematicEntity(b2Shape* shapeDef) {
+
+        PhysicsObject::ptr lCollider(new PhysicsObject(shapeDef, b2_kinematicBody, &mWorld));
+        mColliders.push_back(lCollider);
+        return mColliders.back();
+    }
+    PhysicsObject::ptr PhysicsService::registerDynamicEntity(b2Shape* shapeDef, float pRestitution, float density) {
+
+        PhysicsObject::ptr lCollider(new PhysicsObject(shapeDef, b2_dynamicBody, pRestitution, &mWorld, density));
+        mColliders.push_back(lCollider);
+        return mColliders.back();
+    }
+
+    void PhysicsService::unregisterEntity(const PhysicsObject::ptr& physicsObject){
+	mColliders.erase(std::remove(mColliders.begin(), mColliders.end(), physicsObject), mColliders.end());
     }
 
     status PhysicsService::update() {

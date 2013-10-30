@@ -40,6 +40,7 @@ namespace hsg {
 	glutReshapeFunc(resize_callback);
 	glutMouseFunc(mouse_callback);
 	glutIdleFunc(idle_callback);
+	glutKeyboardFunc(key_press_callback);
 	glutSpecialFunc(special_key_press_callback);
 	glutSpecialUpFunc(special_key_up_callback);
 
@@ -108,6 +109,12 @@ namespace hsg {
 	    m_gameQueue.postEvent(Event::ptr(new Event(SYSTEM_KEY_RIGHT_UP)));
 	}
     }
+    
+    void App::keyPress(unsigned char key, int x, int y){
+	if(key == ' '){
+	    m_gameQueue.postEvent(Event::ptr(new Event(GAME_LVL_START)));
+	}
+    }
 
     void App::draw_callback(){
 	App::_instance->draw();
@@ -131,6 +138,10 @@ namespace hsg {
 
     void App::special_key_up_callback(int key, int x, int y){
 	App::_instance->specialKeyUp(key, x, y);
+    }
+    
+    void App::key_press_callback(unsigned char key, int x, int y){
+	App::_instance->keyPress(key, x, y);
     }
 
     void App::preloadtextures(){

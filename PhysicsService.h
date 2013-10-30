@@ -12,7 +12,13 @@ namespace hsg {
     class PhysicsService: private b2ContactListener {
     public:
 	PhysicsService(TimeService* pTimeService);
-	PhysicsObject::ptr registerEntity(b2Shape* shapeDef, uint16 pCategory, uint16 pMask, float pRestitution);
+
+	PhysicsObject::ptr registerEntity(b2Shape* shapeDef, b2BodyType bodyType, uint16 pCategory, uint16 pMask, float pRestitution);
+	PhysicsObject::ptr registerStaticEntity(b2Shape* shapeDef);
+	PhysicsObject::ptr registerKinematicEntity(b2Shape* shapeDef);
+	PhysicsObject::ptr registerDynamicEntity(b2Shape* shapeDef, float pRestitution, float density = 1.0f);
+
+	void unregisterEntity(const PhysicsObject::ptr& physicsObject);
 	status update();
 
     private:

@@ -5,10 +5,11 @@
 #include "GameLayout.h"
 #include "PhysicsObject.h"
 #include "GraphicsSprite.h"
+#include "IEventListener.h"
 
 namespace hsg {
 
-    class Ball {
+    class Ball: public IEventListener {
     public:
 	Ball(Context* context, BallLayout* layout);
 	~Ball();
@@ -16,8 +17,12 @@ namespace hsg {
 	void spawn();
 	void update();
 
+	void onEvent(const Event::ptr& event);
+
     private:
 	GraphicsService* m_graphics;
+	PhysicsService* m_physicsService;
+	EventDispatcher* m_gameQueue;
 	PhysicsObject::ptr m_physics;
 	GraphicsSprite* m_sprite;
 	BallLayout m_layout;

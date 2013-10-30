@@ -7,7 +7,7 @@
 namespace hsg {
 
     Bat::Bat(Context* context, BatLayout* layout):
-	VELOCITY_X(1),
+	VELOCITY_X(3),
 	m_graphicsService(context->graphicsService),
 	m_gameQueue(context->gameQueue){
 
@@ -17,9 +17,9 @@ namespace hsg {
 	    layout->width, layout->height, layout->center);
 
 	m_layout = *layout;
-	m_shapeDef.SetAsBox(layout->width, layout->height);
-        m_physics = context->physicsService->registerEntity(&m_shapeDef,
-	    0X1, 0x2, 0.0f);
+	m_shapeDef.SetAsBox(layout->width/2, layout->height/2);
+	
+        m_physics = context->physicsService->registerDynamicEntity(&m_shapeDef, 0.0f);
 	
 	m_gameQueue->subscribe(SYSTEM_KEY_LEFT_DOWN, this);
 	m_gameQueue->subscribe(SYSTEM_KEY_RIGHT_DOWN, this);
@@ -29,10 +29,13 @@ namespace hsg {
 
     void Bat::spawn(){
 	m_physics->initialize(m_layout.center.x, m_layout.center.y, 0.0f, 0.0f);
-	m_sprite->setLocation(m_physics->m_location);
+	m_sprite->setLocation(m_layout.center);
     }
 
     void Bat::update(){
+	if(m_physics->m_collide){
+	    HSG_DEBUG("Bat collide");
+	}
 	m_sprite->setLocation(m_physics->m_location);
     }
 

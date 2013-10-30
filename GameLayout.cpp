@@ -22,7 +22,7 @@ namespace hsg {
 	ball.diameter = width * 0.05;
 			
 	bat.width  = width * 0.25;
-	bat.height = height * 0.025;
+	bat.height = height * 0.2;
 
 	bat.center.set(coordSystem->center().x,
 		       coordSystem->bottom() + bat.height / 2,

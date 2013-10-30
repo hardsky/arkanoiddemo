@@ -25,6 +25,7 @@ public:
 
 private:
 	GraphicsService* m_graphicsService;
+	PhysicsService* m_physicsService;
 	PhysicsObject::ptr m_physics;
 	GraphicsSprite* m_sprite;
 	BrickLayout m_layout;

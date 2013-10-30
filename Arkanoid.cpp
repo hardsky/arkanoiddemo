@@ -30,6 +30,7 @@ namespace hsg {
 	//HSG_DEBUG("Arkanoid: update");
 	//return;
         m_timeService->update();
+	m_physicsService->update();
 
 
 	m_ball->update();
@@ -38,16 +39,18 @@ namespace hsg {
 	m_edges->update();
 
 	m_appQueue->postEvent(Event::ptr(new Event(SYSTEM_VIDEO_UPDATE)));
-	m_physicsService->update();
     }
 
     void Arkanoid::activate() {	
 	HSG_DEBUG("Arkanoid: activate");
 
+	m_timeService->reset();
+
 	m_ball->spawn();
 	m_bat->spawn();
 	m_wall->spawn();
 	m_edges->spawn();
+	
 
 	m_appQueue->postEvent(Event::ptr(new Event(SYSTEM_VIDEO_UPDATE)));
 

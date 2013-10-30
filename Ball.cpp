@@ -1,11 +1,15 @@
 #include "Ball.h"
 #include "PhysicsService.h"
 #include "GraphicsService.h"
+#include "EventDispatcher.h"
+#include "Log.h"
 
 namespace hsg {
 
     Ball::Ball(Context* context, BallLayout* layout):
-	m_graphics(context->graphicsService){
+	m_graphics(context->graphicsService),
+	m_physicsService(context->physicsService),
+	m_gameQueue(context->gameQueue){
 
 	m_sprite=m_graphics->registerSprite(
 	    m_graphics->registerTexture(layout->fileName.c_str()),
@@ -16,13 +20,15 @@ namespace hsg {
         m_shapeDef.m_p = b2Vec2_zero;
         m_shapeDef.m_radius = layout->diameter / 2.0f;
 
-        m_physics = context->physicsService->registerEntity(&m_shapeDef,
-	    0X1, 0x2, 1.0f);
+	m_physics = m_physicsService->registerDynamicEntity(&m_shapeDef, 1.0f);
 
+	m_gameQueue->subscribe(GAME_LVL_START, this);
     }
 
     Ball::~Ball() {
+	m_gameQueue->unsubscribe(GAME_LVL_START, this);
 	m_graphics->unregisterSprite(m_sprite);
+	m_physicsService->unregisterEntity(m_physics);
     }
 
     void Ball::spawn(){
@@ -31,7 +37,18 @@ namespace hsg {
     }
 
     void Ball::update(){
+	if(m_physics->m_collide){
+	    //HSG_DEBUG("Ball collide");
+	}
 	m_sprite->setLocation(m_physics->m_location);
+    }
+    
+    void Ball::onEvent(const Event::ptr& event){
+	switch(event->getEventType()){
+	case GAME_LVL_START:
+	    m_physics->applyImpulse(.018f, .018f);
+	    break;
+	}
     }
 
 } /* namespace hsg */
