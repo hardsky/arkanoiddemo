@@ -69,7 +69,6 @@ namespace hsg {
     }
 
     void PhysicsObject::setVelocity(float velocityX, float velocityY){
-	//m_bodyObj->SetAwake(false);
         m_bodyObj->SetLinearVelocity(b2Vec2(velocityX, velocityY));
     }
     void PhysicsObject::applyImpulse(float x, float y){

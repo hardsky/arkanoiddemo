@@ -40,7 +40,6 @@ namespace hsg {
     }
 
     void Bat::onEvent(const Event::ptr& event){
-	//HSG_DEBUG("Bat::onEvent");
 	switch(event->getEventType()){
 	case SYSTEM_KEY_LEFT_DOWN:
 	{

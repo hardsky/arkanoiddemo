@@ -17,7 +17,6 @@ namespace hsg {
 	    layout->diameter, layout->diameter, layout->center);
 
 	m_layout = *layout;
-        // Box2D requires half dimension (from center to borders).
         m_shapeDef.m_p = b2Vec2_zero;
         m_shapeDef.m_radius = layout->diameter / 2.0f;
 

@@ -57,7 +57,6 @@ namespace hsg {
     }
 */
     void GameLayout::loadLevel(const char* fileName){
-	HSG_DEBUG("GameLayout::loadLevel: %s", fileName);
 
 	boost::shared_array<char> text;
 
@@ -71,8 +70,6 @@ namespace hsg {
 	    ifs.close();
 	    text[length] = '\0';
 	    
-	    HSG_DEBUG("file length: %d",length);
-	    HSG_DEBUG("%s",text.get());
 	}
 
 	xml_document<> doc;
@@ -100,7 +97,6 @@ namespace hsg {
     }
 
     void GameLayout::parseMosaic(xml_node<> *mosaicNode){
-	HSG_DEBUG("GameLayout::parseMosaic");
 
 	int rowCnt = 0;
 	int colCnt = 0;

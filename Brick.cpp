@@ -21,15 +21,9 @@ namespace hsg {
     }
 
     void Brick::spawn(){
-	//m_physics->initialize(m_layout.center.x, m_layout.center.y, 0.0f, 0.0f);
-	//m_sprite->setLocation(m_physics->m_location);
     }
 
     void Brick::update(){
-	if(m_physics->m_collide){
-	    HSG_DEBUG("Brick collide");
-	}
-	//m_sprite->setLocation(m_physics->m_location);
     }
 
     Brick::~Brick() {

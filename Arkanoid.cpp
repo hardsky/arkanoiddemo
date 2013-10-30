@@ -27,8 +27,6 @@ namespace hsg {
 	// TODO Auto-generated destructor stub
     }
     void Arkanoid::update() {
-	//HSG_DEBUG("Arkanoid: update");
-	//return;
         m_timeService->update();
 	m_physicsService->update();
 
@@ -57,8 +55,6 @@ namespace hsg {
     }
 
     void Arkanoid::deactivate() {
-	//m_timeService->stop();
-	//m_physicsService->stop();
     }
 
 } /* namespace hsg */

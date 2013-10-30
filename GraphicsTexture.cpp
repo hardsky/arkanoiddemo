@@ -1,6 +1,5 @@
 #include "GraphicsTexture.h"
 #include "Log.h"
-//#include "PathResolver.h"
 
 namespace hsg {
     GraphicsTexture::GraphicsTexture(const char* sName) :
@@ -32,8 +31,6 @@ namespace hsg {
     }
 
     status GraphicsTexture::load(IImageLoader* pImgLoader) {
-    	//std::string sTextPath;
-    	//PathResolver::resolveTexturePath(m_sName, sTextPath);
     	status res = pImgLoader->load(m_sName, m_desiredSize.Width, m_desiredSize.Height);
     	if(res != STATUS_OK)
     		return res;
