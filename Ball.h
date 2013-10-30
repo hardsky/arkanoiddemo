@@ -20,6 +20,7 @@ namespace hsg {
 	void onEvent(const Event::ptr& event);
 
     private:
+	CoordSystem* m_coordSystem;
 	GraphicsService* m_graphics;
 	PhysicsService* m_physicsService;
 	EventDispatcher* m_gameQueue;
@@ -27,6 +28,7 @@ namespace hsg {
 	GraphicsSprite* m_sprite;
 	BallLayout m_layout;
 	b2CircleShape m_shapeDef;
+	float m_worldEdge;
     };
 
 } /* namespace hsg */

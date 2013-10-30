@@ -9,7 +9,8 @@ namespace hsg {
     Ball::Ball(Context* context, BallLayout* layout):
 	m_graphics(context->graphicsService),
 	m_physicsService(context->physicsService),
-	m_gameQueue(context->gameQueue){
+	m_gameQueue(context->gameQueue),
+	m_worldEdge(context->coordSystem->bottom() - layout->diameter / 2){
 
 	m_sprite=m_graphics->registerSprite(
 	    m_graphics->registerTexture(layout->fileName.c_str()),
@@ -37,10 +38,12 @@ namespace hsg {
     }
 
     void Ball::update(){
-	if(m_physics->m_collide){
-	    //HSG_DEBUG("Ball collide");
+	if(m_physics->m_location.y < m_worldEdge){
+	    spawn();
 	}
-	m_sprite->setLocation(m_physics->m_location);
+	else{
+	    m_sprite->setLocation(m_physics->m_location);
+	}
     }
     
     void Ball::onEvent(const Event::ptr& event){
