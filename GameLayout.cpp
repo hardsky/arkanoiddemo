@@ -32,7 +32,7 @@ namespace hsg {
 	ball.center.y += bat.height / 2 + ball.diameter / 2;
 			
 	wall.center.set(coordSystem->center().x,
-			coordSystem->top() - height * 0.1 -  wall.height / 2,
+			coordSystem->top() - height * 0.05 -  wall.height / 2,
 			0);
 
 	background.width = width;
@@ -129,7 +129,7 @@ namespace hsg {
 
 	    std::vector<std::string>& rowStr = wallStr[row];
 	    float rowWidth = rowStr.size() * brickWidth;
-	    float brickX = centerX - rowWidth / 2;
+	    float brickX = centerX - rowWidth / 2 + brickWidth / 2;
 
 	    for(int col = 0; col < rowStr.size(); ++col){
 
